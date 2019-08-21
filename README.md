@@ -24,7 +24,7 @@
 					<tbody>
 						<tr>
 							<td><code>./</code></td>
-							<td>Contains all files to run shell</td>
+							<td>It contains all the files needed to create the shell</td>
 						</tr>
 					</tbody>
 				</table>
