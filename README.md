@@ -9,7 +9,7 @@
 					Introduction
 				</h2>
 				<p>Description</p>
-				<p>I wrote my own shell with <a href="https://twitter.com/micael_sosa">Michael Sosa</a>. It is a simple version of the sh shell. All the outputs and exit statuses should return the same as sh's. This project focused on memory, sys calls, and pointers to pointers. Like the project above, there were limitations</p>
+				<p>I wrote my own shell with <a href="https://twitter.com/micael_sosa">Michael Sosa</a> It is a simple version of the sh shell. All the outputs and exit statuses should return the same as sh's. This project focused on memory, sys calls, and pointers to pointers. Like the project above, there were limitations</p>
 				<h2>
 					Description of Each Directory
 				</h2>
