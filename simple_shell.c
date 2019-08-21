@@ -5,21 +5,26 @@
  *
  * Descrption: This function has the constructor atribute
  * so C will always run it at first.
+ * 
+ * Return: void
  */
 void __attribute__((constructor)) init()
 {
-	/* We start the basic setup from our shell*/
+	/* We start the basic setup from our shell */
 	init_shell();
 }
 
 /**
  * init_shell - Initializes variables from shell
+ *
+ * Return: void
  */
 void init_shell(void)
 {
-	/*isatty() 1 if the given file descriptor is a terminal, 0 otherwise.*/
+	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
 	shell.tty = isatty(STDIN_FILENO);
-	/*Run always true so it will be reading all the time*/
+
+	/* Run always true so it will be reading all the time */
 	shell.run = true;
 }
 
@@ -28,80 +33,98 @@ void init_shell(void)
  * A: strlock to get the first token entered
  * B: strdup because strtok modifies the original string so we keep a copy
  * C: The first argument of owr shell will be the first token
- * Return: test
+ * 
+ * Return: return 1 if there is a new line digit
  */
 int read_command(void)
 {
-	/* Contador de argumentos */
 	int c = 0;
 
-	if (_getline())/*if getline returns true*/
+	/* If getline returns true */
+	if (_getline())
 	{
 		if (shell.command_line[0] != '\n')
 		{
-			shell.command = strtok(shell.command_line, " \n");/*A*/
-			shell.command = _strdup(shell.command_line);/*B*/
-			shell.argv[0] = shell.command;/*C*/
-			if (_strcmp(shell.argv[0], "exit") == 0)/*if user types exit*/
+			shell.command = strtok(shell.command_line, " \n"); /* A */
+			shell.command = _strdup(shell.command_line); /* B */
+			shell.argv[0] = shell.command; /* C */
+			
+			/* If user types exit */
+			if (_strcmp(shell.argv[0], "exit") == 0)
 			{
 				free_args();
-				exit(true);/*TODO: Pending exit status*/
+				exit(true);
 			}
-			if (_strcmp(shell.argv[0], "\n") == 0)/*if user types \n with no commands*/
+
+			/* If user types \n with no commands */
+			if (_strcmp(shell.argv[0], "\n") == 0)
 				return (false);
-			/*We save the rest of the arguments user entered*/
+
+			/* We save the rest of the arguments user entered */
 			for (c = 1; (shell.argv[c] = strtok(NULL, " \n")); c++)
 				shell.argv[c] = _strdup(shell.argv[c]);
-			shell.argv[c] = NULL;/*set the last element of the array to NULL*/
+
+			/* Set the last element of the array to NULL */
+			shell.argv[c] = NULL;
 			return (true);
 		}
-	} else
-	{
-		shell.run = false;/*If _getline could not read*/
-		return (false); /* EOF */
 	}
+	else
+		shell.run = false; /* If _getline could not read */
+
 	return (false);
 }
 
 /**
  * exec_command - Executes the full command
+ * 
  * Return: @-1 if no commands entered
  */
 int exec_command(void)
 {
-	int id, exec;
+	int id;
 
-	if (read_command())/*if the command was read succesfully*/
+	/* If the command was read succesfully */
+	if (read_command())
 	{
-		id = fork();/**/
+		id = fork();
 
 		if (!id)
 		{
-			exec = execve(shell.command, &shell.argv[0], NULL);
-			if (exec == -1)
-			{
-				/*Print error if command doesn't exist*/
-				error_printer(shell.argv[0], ": not found\n");
-			}
-			shell.run = false;/*To stop the child process*/
-		} else
-			wait(NULL);/*To sincronyse parent and child processes*/
-	} else if (!shell.run && shell.tty)
+			execve(shell.command, &shell.argv[0], NULL);
+			/* Print error if command doesn't exist */
+			perror(shell.command);
+
+			/* To stop the child process */
+			shell.run = false;
+		}
+		else
+			wait(NULL); /* To sincronyse parent and child processes */
+	}
+	else if (!shell.run && shell.tty)
 	{
-		_puts("\n");/*print \n if EOF and its a tty*/
-		return (-1);/*if end of file return -1 so free wont execute*/
-	} else
+		/* Print \n if EOF and its a tty */
+		_puts("\n");
+
+		/* If end of file return -1 so free wont execute */
 		return (-1);
+	}
+	else
+		return (-1); /* If the user gives a single enter */
+
 	return (false);
 }
 
 /**
  * print_prompt_tty - checks if the given file descriptor is terminal
- * and prints the propmt if so.
+ * and prints the propmt if so
+ * 
+ * Return: void
  */
 void print_prompt_tty(void)
 {
 	if (shell.tty)
 		_puts("#cisfun$ ");
+
 	fflush(stdout);
 }
