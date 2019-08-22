@@ -4,15 +4,15 @@
  * @argc: arguments count
  * @argv: arguments vector
  * @env: environ
- * 
+ *
  * Return: @false when the program ends whit no errors
  */
-int main()
+int main(void)
 {
 	while (shell.run)
 	{
 		/* 2 Interrupt the process if Ctrl+C */
-		signal(SIGINT, signal_killer); 
+		signal(SIGINT, signal_killer);
 
 		/* We print promt only if it's a tty */
 		print_prompt_tty();
