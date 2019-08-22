@@ -15,11 +15,13 @@ char *_strtok(char *s, const char *delim)
 
 	if (s == NULL)
 		s = save_ptr;
+
 	if (*s == '\0')
 	{
 		save_ptr = s;
 		return (NULL);
 	}
+
 	/* Scan leading delimiters.  */
 	s += _strspn(s, delim);
 	if (*s == '\0')
@@ -27,6 +29,7 @@ char *_strtok(char *s, const char *delim)
 		save_ptr = s;
 		return (NULL);
 	}
+
 	/* Find the end of the token.  */
 	end = s + _strcspn(s, delim);
 	if (*end == '\0')
@@ -34,6 +37,7 @@ char *_strtok(char *s, const char *delim)
 		save_ptr = end;
 		return (s);
 	}
+
 	/* Terminate the token and make SAVE_PTR point past it.  */
 	*end = '\0';
 	save_ptr = end + 1;
