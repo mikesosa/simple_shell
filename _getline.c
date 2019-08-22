@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * _getline - reads the entire line of strings passed to our shell
  *
@@ -11,18 +10,31 @@
  */
 int _getline(void)
 {
-	shell.command_len = read(STDIN_FILENO, shell.command_line, MAX_LEN);
+	static char buf[MAX_BUF_NOTTY] = {0};
+	static int read_len = 0;
+	static int pos = 0;
+	int iline = 0;
 
-	/* If read success */
-	if (shell.command_len)
+
+	while (pos < read_len || (read_len = read(STDIN_FILENO, buf, sizeof buf)))
 	{
-		/* We end the string with a 0 only if user doesn't */
-		/* Enter a new line '\n' */
-		if (shell.command_line[0] != '\n')
-			shell.command_line[shell.command_len - 1] = 0;
-	}
-	else
-		return (false); /* EOF - Ctrl+D */
+		for (; buf[pos] && pos < MAX_BUF_NOTTY; pos++)
+		{
+			if (buf[pos] == '\n')
+			{
+				pos++;
+				return (iline);
+			}
 
-	return (true);
+			shell.command_line[iline++] =  buf[pos];
+		}
+
+		if (pos == MAX_BUF_NOTTY)
+		{
+			memset(buf, 0, read_len);
+			pos = 0;
+		}
+	}
+
+	return (false);
 }

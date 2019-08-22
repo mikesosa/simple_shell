@@ -9,6 +9,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 /* Functions for simple_shell*/
 int exec_command(void); /* I had to change the return value to free argv */
 void signal_killer(int n); /* Takes signal CTRL+C */
@@ -25,12 +29,14 @@ char *_strdup(char *s);
 void _puts(char *str);
 int _strlen(char *s);
 int _putchar(char c);
+int _readline(void);
 int _getline(void);
 
 /**
  * MAX_LEN - Max size of buffer
  */
 
+#define MAX_BUF_NOTTY 4096
 #define MAX_LEN 1024
 #define false 0
 #define true 1

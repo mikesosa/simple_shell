@@ -38,10 +38,15 @@ void init_shell(void)
  */
 int read_command(void)
 {
-	int c = 0;
+	int c = 0, r = 0;
 
 	/* If getline returns true */
-	if (_getline())
+	if (shell.tty)
+		r = _readline();
+	else
+		r = _getline();
+
+	if (r)
 	{
 		if (shell.command_line[0] != '\n')
 		{
