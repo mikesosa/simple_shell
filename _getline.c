@@ -5,7 +5,7 @@
  * Descrption: This is our own version of the function getline()
  * we use read to read from the stdin, we save the string in command_line
  * and the bytes read in command_len.
- * 
+ *
  * Return: @true if was possible to read @false if fails.
  */
 int _getline(void)

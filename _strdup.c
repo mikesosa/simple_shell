@@ -3,7 +3,7 @@
 /**
  * *_strdup - copies an string to an array
  * @s: Source string
- * 
+ *
  * Return: @dest which is the new memory location.
  */
 char *_strdup(char *s)

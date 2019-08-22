@@ -3,7 +3,7 @@
 /**
  * signal_killer - takes signals and perform print_prompt again
  * @n: type of signal, in this case SIGINT is equivalent to 2
- * 
+ *
  * Return: void
  */
 void signal_killer(__attribute((unused))int n)
