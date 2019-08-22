@@ -20,12 +20,16 @@ void init_shell(void);
 void free_args(void);
 
 /* Functions for getting strings*/
+char *_strtok (char *str, const char *delim);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *s);
 void _puts(char *str);
 int _strlen(char *s);
 int _putchar(char c);
 int _getline(void);
+size_t _strspn(char *s, const char *accept);
+size_t _strcspn(char *s, const char *reject);
+
 
 /**
  * MAX_LEN - Max size of buffer

@@ -5,7 +5,7 @@
  *
  * Descrption: This function has the constructor atribute
  * so C will always run it at first.
- * 
+ *
  * Return: void
  */
 void __attribute__((constructor)) init()
@@ -33,7 +33,7 @@ void init_shell(void)
  * A: strlock to get the first token entered
  * B: strdup because strtok modifies the original string so we keep a copy
  * C: The first argument of owr shell will be the first token
- * 
+ *
  * Return: return 1 if there is a new line digit
  */
 int read_command(void)
@@ -45,10 +45,10 @@ int read_command(void)
 	{
 		if (shell.command_line[0] != '\n')
 		{
-			shell.command = strtok(shell.command_line, " \n"); /* A */
+			shell.command = _strtok(shell.command_line, " \n"); /* A */
 			shell.command = _strdup(shell.command_line); /* B */
 			shell.argv[0] = shell.command; /* C */
-			
+
 			/* If user types exit */
 			if (_strcmp(shell.argv[0], "exit") == 0)
 			{
@@ -61,7 +61,7 @@ int read_command(void)
 				return (false);
 
 			/* We save the rest of the arguments user entered */
-			for (c = 1; (shell.argv[c] = strtok(NULL, " \n")); c++)
+			for (c = 1; (shell.argv[c] = _strtok(NULL, " \n")); c++)
 				shell.argv[c] = _strdup(shell.argv[c]);
 
 			/* Set the last element of the array to NULL */
@@ -77,7 +77,7 @@ int read_command(void)
 
 /**
  * exec_command - Executes the full command
- * 
+ *
  * Return: @-1 if no commands entered
  */
 int exec_command(void)
@@ -118,7 +118,7 @@ int exec_command(void)
 /**
  * print_prompt_tty - checks if the given file descriptor is terminal
  * and prints the propmt if so
- * 
+ *
  * Return: void
  */
 void print_prompt_tty(void)
