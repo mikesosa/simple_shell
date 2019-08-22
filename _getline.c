@@ -22,6 +22,7 @@ int _getline(void)
 		{
 			if (buf[pos] == '\n')
 			{
+				shell.command_line[iline] = 0;
 				pos++;
 				return (iline);
 			}
