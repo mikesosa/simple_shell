@@ -24,6 +24,7 @@ int _getline(void)
 			{
 				shell.command_line[iline] = 0;
 				pos++;
+
 				return (iline);
 			}
 
