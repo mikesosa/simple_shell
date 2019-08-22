@@ -18,7 +18,7 @@ int _getline(void)
 
 	while (pos < read_len || (read_len = read(STDIN_FILENO, buf, sizeof buf)))
 	{
-		for (; buf[pos] && pos < MAX_BUF_NOTTY; pos++)
+		for (; pos < read_len && pos < MAX_BUF_NOTTY; pos++)
 		{
 			if (buf[pos] == '\n')
 			{
