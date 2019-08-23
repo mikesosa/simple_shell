@@ -34,6 +34,9 @@ int _readline(void);
 int _getline(void);
 size_t _strspn(char *s, const char *accept);
 size_t _strcspn(char *s, const char *reject);
+/*for deleting blank spaces*/
+int deblank(char *input);
+char *_strcpy(char *dest, char *src);
 
 #define MAX_BUF_NOTTY 4096
 #define MAX_LEN 1024
