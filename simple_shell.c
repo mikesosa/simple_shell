@@ -90,7 +90,7 @@ int exec_command(void)
 	int id;
 
 	/* If the command was read succesfully */
-	if (read_command())
+	if (read_command() && shell.command_line[0])
 	{
 		id = fork();
 

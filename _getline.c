@@ -20,10 +20,20 @@ int _getline(void)
 	{
 		for (; pos < read_len && pos < MAX_BUF_NOTTY; pos++)
 		{
-			if (buf[pos] == '\n')
+			if (buf[pos] == '\n' || (pos == read_len - 1 && pos != MAX_BUF_NOTTY))
 			{
-				shell.command_line[iline] = 0;
-				pos++;
+				if (buf[pos] == '\n' && iline)
+				{
+					shell.command_line[iline] = 0;
+					pos++;
+				}
+				else if (!iline)
+				{
+					pos += ++iline;
+					shell.command_line[0] = 0;
+				}
+				else
+					shell.command_line[iline] = buf[pos];
 
 				return (iline);
 			}
