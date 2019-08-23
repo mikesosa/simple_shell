@@ -48,6 +48,6 @@ int _getline(void)
 			pos = 0;
 		}
 	}
-
+	free(buf);
 	return (false);
 }
