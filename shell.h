@@ -14,17 +14,17 @@
 #include <fcntl.h>
 
 /* Functions for simple_shell*/
-int exec_command(void); /* I had to change the return value to free argv */
-void signal_killer(int n); /* Takes signal CTRL+C */
 void error_printer(char *command, char *to_print);
 void __attribute__((constructor)) init();
 void print_prompt_tty(void);
+void signal_killer(int n);
+int exec_command(void);
 int read_command(void);
 void init_shell(void);
 void free_args(void);
 
 /* Functions for getting strings*/
-char *_strtok (char *str, const char *delim);
+char *_strtok(char *str, const char *delim);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *s);
 void _puts(char *str);
@@ -34,11 +34,6 @@ int _readline(void);
 int _getline(void);
 size_t _strspn(char *s, const char *accept);
 size_t _strcspn(char *s, const char *reject);
-
-
-/**
- * MAX_LEN - Max size of buffer
- */
 
 #define MAX_BUF_NOTTY 4096
 #define MAX_LEN 1024
@@ -63,7 +58,6 @@ typedef struct shell_t
 	int command_len;
 	char *argv[512];
 	char *command;
-	char **env;
 	char run;
 	char tty;
 } shell_t;

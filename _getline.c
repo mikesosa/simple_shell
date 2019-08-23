@@ -11,10 +11,10 @@
 int _getline(void)
 {
 	static char buf[MAX_BUF_NOTTY] = {0};
-	static int read_len = 0, pos = 0;
+	static int read_len, pos;
 	int iline = 0;
 
-	while (pos < read_len || (read_len = read(STDIN_FILENO, buf, sizeof buf)))
+	while (pos < read_len || (read_len = read(STDIN_FILENO, buf, sizeof(buf))))
 	{
 		for (; pos < read_len && pos < MAX_BUF_NOTTY; pos++)
 		{

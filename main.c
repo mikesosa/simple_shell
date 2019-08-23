@@ -1,9 +1,6 @@
 #include "shell.h"
 /**
  * main - a while loop with all the necesary functions to run shell
- * @argc: arguments count
- * @argv: arguments vector
- * @env: environ
  *
  * Return: @false when the program ends whit no errors
  */
