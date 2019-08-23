@@ -24,6 +24,8 @@ void init_shell(void);
 void free_args(void);
 
 /* Functions for getting strings*/
+size_t _strcspn(char *s, const char *reject);
+size_t _strspn(char *s, const char *accept);
 char *_strtok(char *str, const char *delim);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *s);
@@ -32,11 +34,10 @@ int _strlen(char *s);
 int _putchar(char c);
 int _readline(void);
 int _getline(void);
-size_t _strspn(char *s, const char *accept);
-size_t _strcspn(char *s, const char *reject);
-/*for deleting blank spaces*/
-int deblank(char *input);
+
+/* For deleting blank spaces */
 char *_strcpy(char *dest, char *src);
+void deblank(void);
 
 #define MAX_BUF_NOTTY 4096
 #define MAX_LEN 1024
