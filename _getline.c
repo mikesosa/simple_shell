@@ -11,10 +11,8 @@
 int _getline(void)
 {
 	static char buf[MAX_BUF_NOTTY] = {0};
-	static int read_len = 0;
-	static int pos = 0;
+	static int read_len = 0, pos = 0;
 	int iline = 0;
-
 
 	while (pos < read_len || (read_len = read(STDIN_FILENO, buf, sizeof buf)))
 	{
@@ -29,8 +27,8 @@ int _getline(void)
 				}
 				else if (!iline)
 				{
-					pos += ++iline;
 					shell.command_line[0] = 0;
+					pos += ++iline;
 				}
 				else
 					shell.command_line[iline] = buf[pos];
