@@ -1,5 +1,58 @@
 #include "shell.h"
 /**
+ * _puts - function to print strings.
+ * @str: the string
+ *
+ * Return: it returns the length of the string.
+ */
+void _puts(char *str)
+{
+	int x = 0;
+
+	while (str[x])
+		_putchar(str[x++]);
+}
+/**
+ * _putchar - Fuction that prints to the std output
+ * @c: char to print
+ *
+ * Return: the char printed
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+/**
+ * _readline - reads the entire line of strings passed to our shell
+ *
+ * Descrption: This is our own version of the function getline()
+ * we use read to read from the stdin, we save the string in command_line
+ * and the bytes read in command_len.
+ *
+ * Return: @true if was possible to read @false if fails.
+ */
+int _readline(void)
+{
+	if (!shell.tty)
+		return (false);
+
+	shell.command_len = read(STDIN_FILENO, shell.command_line, MAX_LEN);
+	deblank(); /* deleten spaces */
+
+	/* If read success */
+	if (shell.command_len)
+	{
+		/* We end the string with a 0 only if user doesn't */
+		/* Enter a new line '\n' */
+		if (shell.command_line[0] != '\n')
+			shell.command_line[shell.command_len - 1] = 0;
+	}
+	else
+		return (false); /* EOF - Ctrl+D */
+
+	return (true);
+}
+/**
  * _getline - reads the entire line of strings passed to our shell
  *
  * Descrption: This is our own version of the function getline()

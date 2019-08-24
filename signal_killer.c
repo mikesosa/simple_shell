@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * signal_killer - takes signals and perform print_prompt again
  * @n: type of signal, in this case SIGINT is equivalent to 2

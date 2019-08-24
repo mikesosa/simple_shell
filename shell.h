@@ -1,9 +1,9 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-#include <signal.h> /* To handle Ctrl + C */
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>

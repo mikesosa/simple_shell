@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * init - Construction function which calls the initializer function
  *
@@ -13,7 +12,6 @@ void __attribute__((constructor)) init()
 	/* We start the basic setup from our shell */
 	init_shell();
 }
-
 /**
  * init_shell - Initializes variables from shell
  *
@@ -27,7 +25,6 @@ void init_shell(void)
 	/* Run always true so it will be reading all the time */
 	shell.run = true;
 }
-
 /**
  * read_command - reads the command entered by the user
  * A: strlock to get the first token entered
@@ -54,13 +51,6 @@ int read_command(void)
 			shell.command = _strdup(shell.command_line); /* B */
 			shell.argv[0] = shell.command; /* C */
 
-			/* If user types exit */
-			if (_strcmp(shell.argv[0], "exit") == 0)
-			{
-				free_args();
-				exit(true);
-			}
-
 			/* If user types \n with no commands */
 			if (_strcmp(shell.argv[0], "\n") == 0)
 				return (false);
@@ -79,7 +69,6 @@ int read_command(void)
 
 	return (false);
 }
-
 /**
  * exec_command - Executes the full command
  *
@@ -119,7 +108,6 @@ int exec_command(void)
 
 	return (false);
 }
-
 /**
  * print_prompt_tty - checks if the given file descriptor is terminal
  * and prints the propmt if so
