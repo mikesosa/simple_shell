@@ -1,5 +1,28 @@
 #include "shell.h"
 /**
+ * _strcat - concatenates two strings
+ * @dest: string (char *)
+ * @src: string (char *)
+ *
+ * Return: char *
+ */
+char *_strcat(char *dest, char *src)
+{
+	char *t_dest = dest, *t_src = src;
+
+	while (*dest++)
+		;
+	dest--;
+
+	while (*src)
+		*dest++ = *src++;
+
+	dest = t_dest;
+	src = t_src;
+
+	return (t_dest);
+}
+/**
  * exec - execute function with an without path
  * @path_bin: path dir
  * @cmd: command
@@ -13,11 +36,11 @@ int exec(char *path_bin, char *cmd)
 
 	if (cmd[0] != delim[0] && path_bin)
 	{
-		strcat(full_path, path_bin);
-		strcat(full_path, delim);
+		_strcat(full_path, path_bin);
+		_strcat(full_path, delim);
 	}
 
-	strcat(full_path, cmd);
+	_strcat(full_path, cmd);
 
 	if (access(full_path, F_OK) == 0)
 	{

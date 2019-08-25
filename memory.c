@@ -1,6 +1,8 @@
 #include "shell.h"
 /**
  * free_args - function that frees memory allocations
+ *
+ * Reeturn: void
  */
 void free_args(void)
 {
@@ -11,4 +13,21 @@ void free_args(void)
 
 	for (; shell.argv[i]; i++)
 		free(shell.argv[i]);
+}
+/**
+ * _memset - fill memory with a constant byte
+ * @s: buffer to set
+ * @c: constant byte to write
+ * @n: count
+ *
+ * Return: address of @s
+ */
+void *_memset(void *s, int c, size_t n)
+{
+	size_t i;
+
+	for (i = 0; i < n; i++)
+		((char *)s)[i] = c;
+
+	return (s);
 }

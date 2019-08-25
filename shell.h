@@ -16,6 +16,7 @@
 /* Functions for simple_shell*/
 void error_printer(char *command, char *to_print);
 void __attribute__((constructor)) init();
+void *_memset(void *s, int c, size_t n);
 int exec(char *path, char *command);
 void print_prompt_tty(void);
 void signal_killer(int n);

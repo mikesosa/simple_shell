@@ -33,7 +33,7 @@ int _putchar(char c)
  */
 int _readline(void)
 {
-	memset(shell.command_line, 0, sizeof(shell.command_line));
+	_memset(shell.command_line, 0, sizeof(shell.command_line));
 
 	if (!shell.tty)
 		return (false);
@@ -99,7 +99,7 @@ int _getline(void)
 
 		if (pos == MAX_BUF_NOTTY)
 		{
-			memset(buf, 0, read_len);
+			_memset(buf, 0, read_len);
 			pos = 0;
 		}
 	}
