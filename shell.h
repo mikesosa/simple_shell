@@ -16,8 +16,10 @@
 /* Functions for simple_shell*/
 void error_printer(char *command, char *to_print);
 void __attribute__((constructor)) init();
+int exec(char *path, char *command);
 void print_prompt_tty(void);
 void signal_killer(int n);
+char *_getenv(char *name);
 int exec_command(void);
 int read_command(void);
 void init_shell(void);
@@ -47,9 +49,11 @@ void deblank(void);
 /**
  * struct shell_t - Necessary variables needed to simple_shell
  * @command_line: bufer where we strore the _getline, of MAX_LEN size.
+ * @path_dirs: array of dirs
  * @command_len: lenght of the string entered by the user
  * @argv: Don't know
  * @command: Don't know
+ * @path: Don't know
  * @run: Run always true since our main loop will always be reading
  * @tty: teletype tell us if the given file descriptor is a terminal
  *
@@ -59,9 +63,11 @@ void deblank(void);
 typedef struct shell_t
 {
 	char command_line[MAX_LEN];
+	char *path_dirs[512];
 	int command_len;
 	char *argv[512];
 	char *command;
+	char *path;
 	char run;
 	char tty;
 } shell_t;

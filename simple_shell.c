@@ -21,6 +21,17 @@ void init_shell(void)
 {
 	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
 	shell.tty = isatty(STDIN_FILENO);
+	int i = 0;
+
+	shell.path = _getenv("PATH");
+
+	if (shell.path && strtok(shell.path, ":\n"))
+	{
+		while ((shell.path_dirs[i] = strtok(NULL, ":\n")))
+			i++;
+	}
+
+	shell.path_dirs[i] = NULL;
 
 	/* Run always true so it will be reading all the time */
 	shell.run = true;
@@ -47,7 +58,7 @@ int read_command(void)
 	{
 		if (shell.command_line[0] != '\n')
 		{
-			shell.command = _strtok(shell.command_line, " \n"); /* A */
+			shell.command = strtok(shell.command_line, " \n"); /* A */
 			shell.command = _strdup(shell.command_line); /* B */
 			shell.argv[0] = shell.command; /* C */
 
@@ -56,7 +67,7 @@ int read_command(void)
 				return (false);
 
 			/* We save the rest of the arguments user entered */
-			for (c = 1; (shell.argv[c] = _strtok(NULL, " \n")); c++)
+			for (c = 1; (shell.argv[c] = strtok(NULL, " \n")); c++)
 				shell.argv[c] = _strdup(shell.argv[c]);
 
 			/* Set the last element of the array to NULL */
@@ -76,24 +87,22 @@ int read_command(void)
  */
 int exec_command(void)
 {
-	int id;
+	int i, r = 0;
 
 	/* If the command was read succesfully */
 	if (read_command() && shell.command_line[0])
 	{
-		id = fork();
-
-		if (!id)
+		if (!shell.path_dirs[0] || shell.path[0] == ':')
+			r = exec(NULL, shell.command_line);
+		else
 		{
-			execve(shell.command, &shell.argv[0], NULL);
+			for (i = 0; shell.path_dirs[i] && !r; i++)
+				r = exec(shell.path_dirs[i], shell.command_line);
+		}
+
+		if (!r)
 			/* Print error if command doesn't exist */
 			perror(shell.command);
-
-			/* To stop the child process */
-			shell.run = false;
-		}
-		else
-			wait(NULL); /* To sincronyse parent and child processes */
 	}
 	else if (!shell.run && shell.tty)
 	{

@@ -33,6 +33,8 @@ int _putchar(char c)
  */
 int _readline(void)
 {
+	memset(shell.command_line, 0, sizeof(shell.command_line));
+
 	if (!shell.tty)
 		return (false);
 
@@ -101,6 +103,6 @@ int _getline(void)
 			pos = 0;
 		}
 	}
-	
+
 	return (false);
 }
