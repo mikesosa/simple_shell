@@ -6,9 +6,10 @@
  *
  * Return: char *
  */
-char *_strcat(char *dest, char *src)
+char *_strcat(char *dest, const char *src)
 {
-	char *t_dest = dest, *t_src = src;
+	const char *t_src = src;
+	char *t_dest = dest;
 
 	while (*dest++)
 		;
@@ -32,7 +33,7 @@ char *_strcat(char *dest, char *src)
 int exec(char *path_bin, char *cmd)
 {
 	char full_path[120] = {0};
-	char *delim = "/";
+	const char * delim = "/";
 
 	if (cmd[0] != delim[0] && path_bin)
 	{

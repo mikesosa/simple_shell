@@ -5,7 +5,7 @@
  *
  * Return: it returns the length of the string.
  */
-void _puts(char *str)
+void _puts(const char *str)
 {
 	int x = 0;
 

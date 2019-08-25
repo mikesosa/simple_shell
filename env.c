@@ -5,9 +5,9 @@
  *
  * Return: address of the variable
 */
-char *_getenv(char *name)
+char *_getenv(const char *name)
 {
-	char *key, *value = NULL;
+	char *key = NULL, *value = NULL;
 	int i = 0;
 
 	for (i = 0; __environ[i]; i++)
@@ -20,9 +20,12 @@ char *_getenv(char *name)
 			break;
 		}
 
-		key[_strlen(key)] = '=';
+		if (key)
+			key[_strlen(key)] = '=';
 	}
 
-	key[_strlen(key)] = '=';
+	if (key)
+		key[_strlen(key)] = '=';
+
 	return (value);
 }
