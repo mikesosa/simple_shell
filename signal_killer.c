@@ -8,5 +8,5 @@
 void signal_killer(__attribute((unused))int n)
 {
 	write(STDOUT_FILENO, "\n", 1);
-	print_prompt_tty();
+	print_prompt_tty(NULL);
 }

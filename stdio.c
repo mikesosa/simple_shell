@@ -24,6 +24,7 @@ int _putchar(char c)
 }
 /**
  * _readline - reads the entire line of strings passed to our shell
+ * @shell: global struct shell
  *
  * Descrption: This is our own version of the function getline()
  * we use read to read from the stdin, we save the string in command_line
@@ -31,23 +32,23 @@ int _putchar(char c)
  *
  * Return: @true if was possible to read @false if fails.
  */
-int _readline(void)
+int _readline(shell_t *shell)
 {
-	_memset(shell.command_line, 0, sizeof(shell.command_line));
+	memset(shell->command_line, 0, sizeof(shell->command_line));
 
-	if (!shell.tty)
+	if (!shell->tty)
 		return (false);
 
-	shell.command_len = read(STDIN_FILENO, shell.command_line, MAX_LEN);
-	deblank(); /* deleten spaces */
+	shell->command_len = read(STDIN_FILENO, shell->command_line, MAX_LEN);
+	deblank(shell); /* deleten spaces */
 
 	/* If read success */
-	if (shell.command_len)
+	if (shell->command_len)
 	{
 		/* We end the string with a 0 only if user doesn't */
 		/* Enter a new line '\n' */
-		if (shell.command_line[0] != '\n')
-			shell.command_line[shell.command_len - 1] = 0;
+		if (shell->command_line[0] != '\n')
+			shell->command_line[shell->command_len - 1] = 0;
 	}
 	else
 		return (false); /* EOF - Ctrl+D */
@@ -56,6 +57,7 @@ int _readline(void)
 }
 /**
  * _getline - reads the entire line of strings passed to our shell
+ * @shell: global struct shell
  *
  * Descrption: This is our own version of the function getline()
  * we use read to read from the stdin, we save the string in command_line
@@ -63,7 +65,7 @@ int _readline(void)
  *
  * Return: @true if was possible to read @false if fails.
  */
-int _getline(void)
+int _getline(shell_t *shell)
 {
 	static char buf[MAX_BUF_NOTTY] = {0};
 	static int read_len, pos;
@@ -78,23 +80,23 @@ int _getline(void)
 				if (buf[pos] == '\n' && iline)
 				{
 					/* Returns when it finds a new line and it's not just a new line */
-					shell.command_line[iline] = 0;
-					deblank();
+					shell->command_line[iline] = 0;
+					deblank(shell);
 					pos++;
 				}
 				else if (!iline)
 				{
 					/* When it's just a new line */
-					shell.command_line[0] = 0;
+					shell->command_line[0] = 0;
 					pos += ++iline;
 				}
 				else
 					/* when the entry does not end in line break */
-					shell.command_line[iline] = buf[pos];
+					shell->command_line[iline] = buf[pos];
 
 				return (iline);
 			}
-			shell.command_line[iline++] =  buf[pos++];
+			shell->command_line[iline++] =  buf[pos++];
 		}
 
 		if (pos == MAX_BUF_NOTTY)

@@ -13,36 +13,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-/* Functions for simple_shell*/
-void error_printer(char *command, char *to_print);
-void __attribute__((constructor)) init();
-void *_memset(void *s, int c, size_t n);
-int exec(char *path, char *command);
-char *_getenv(const char *name);
-void print_prompt_tty(void);
-void signal_killer(int n);
-int exec_command(void);
-int read_command(void);
-void init_shell(void);
-void free_args(void);
-
-/* Functions for getting strings*/
-size_t _strcspn(char *s, const char *reject);
-size_t _strspn(char *s, const char *accept);
-char *_strtok(char *str, const char *delim);
-int _strcmp(const char *s1, const char *s2);
-char *_strcat(char *dest, const char *src);
-void _puts(const char *str);
-char *_strdup(char *s);
-int _strlen(char *s);
-int _putchar(char c);
-int _readline(void);
-int _getline(void);
-
-/* For deleting blank spaces */
-char *_strcpy(char *dest, char *src);
-void deblank(void);
-
 #define MAX_BUF_NOTTY 4096
 #define MAX_LEN 1024
 #define false 0
@@ -74,6 +44,34 @@ typedef struct shell_t
 	char tty;
 } shell_t;
 
-shell_t shell;
+/* Functions for simple_shell*/
+void __attribute__((constructor)) init();
+int exec(shell_t *, char *, char *);
+void error_printer(char *, char *);
+void *_memset(void *, int, size_t);
+void print_prompt_tty(shell_t *);
+shell_t *init_shell(shell_t *);
+int exec_command(shell_t *);
+char *_getenv(const char *);
+int read_command(shell_t *);
+void free_args(shell_t *);
+void signal_killer(int);
+
+/* Functions for getting strings*/
+int _strcmp(const char *s1, const char *);
+size_t _strcspn(char *, const char *);
+size_t _strspn(char *, const char *);
+char *_strtok(char *, const char *);
+char *_strcat(char *, const char *);
+void _puts(const char *);
+char *_strdup(char *);
+int _strlen(char *);
+int _putchar(char);
+int _readline(shell_t *);
+int _getline(shell_t *);
+
+/* For deleting blank spaces */
+char *_strcpy(char *, char *);
+void deblank(shell_t *);
 
 #endif

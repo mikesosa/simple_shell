@@ -83,12 +83,13 @@ int _strlen(char *s)
 }
 /**
  * deblank - delete unnecessary spaces in the string
+ * @shell: global struct shell
  *
  * Return: void
  */
-void deblank(void)
+void deblank(shell_t *shell)
 {
-	char *input = shell.command_line;
+	char *input = shell->command_line;
 	int i, j;
 
 	for (i = 0, j = 0; i < _strlen(input); i++, j++)
@@ -105,5 +106,5 @@ void deblank(void)
 			j--;
 	}
 
-	input[j - ((shell.tty) ? 1 : 0)] = '\0';
+	input[j - ((shell->tty) ? 1 : 0)] = '\0';
 }

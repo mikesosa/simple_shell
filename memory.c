@@ -1,18 +1,19 @@
 #include "shell.h"
 /**
  * free_args - function that frees memory allocations
+ * @shell: global struct shell
  *
  * Reeturn: void
  */
-void free_args(void)
+void free_args(shell_t *shell)
 {
 	int i = 0;
 
-	if (!shell.tty)
+	if (!shell->tty)
 		i = 1;
 
-	for (; shell.argv[i]; i++)
-		free(shell.argv[i]);
+	for (; shell->argv[i]; i++)
+		free(shell->argv[i]);
 }
 /**
  * _memset - fill memory with a constant byte

@@ -25,12 +25,13 @@ char *_strcat(char *dest, const char *src)
 }
 /**
  * exec - execute function with an without path
+ * @shell: global struct shell
  * @path_bin: path dir
  * @cmd: command
  *
  * Return: Always 1 (Success)
 */
-int exec(char *path_bin, char *cmd)
+int exec(shell_t *shell, char *path_bin, char *cmd)
 {
 	char full_path[120] = {0};
 	const char *delim = "/";
@@ -49,10 +50,10 @@ int exec(char *path_bin, char *cmd)
 
 		if (!id)
 		{
-			execve(full_path, &shell.argv[0], NULL);
+			execve(full_path, &shell->argv[0], NULL);
 
 			/* To stop the child process */
-			shell.run = false;
+			shell->run = false;
 		}
 		else
 		{
