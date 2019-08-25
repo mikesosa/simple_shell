@@ -113,7 +113,7 @@ int exec_command(void)
 		return (-1);
 	}
 	else
-		return (-1); /* If the user gives a single enter */
+		return (-2); /* If the user gives a single enter */
 
 	return (false);
 }
