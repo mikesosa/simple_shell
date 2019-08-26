@@ -2,12 +2,14 @@
 
 /**
  * main - a while loop with all the necesary functions to run shell
+ * @argc: arguments count
+ * @argv: arguments vector
  *
  * Return: @false when the program ends whit no errors
  */
-int main(void)
+int main(__attribute((unused))int argc, char *argv[])
 {
-	builtin_command builtin_list[] = {
+	b_command builtin_list[] = {
 		{builtin_exit, "exit"},
 		{builtin_cd, "cd"},
 		{NULL, NULL}
@@ -20,7 +22,7 @@ int main(void)
 	signal(SIGINT, signal_killer);
 
 	/* Fill in some fields of the structure */
-	init_shell(&shell, builtin_list);
+	init_shell(&shell, builtin_list, argv[0]);
 
 	while (shell.run)
 	{

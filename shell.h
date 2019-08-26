@@ -23,22 +23,23 @@
 typedef void (*fun)(void *);
 
 /**
- * struct builtin_command - struct of a builtin command
+ * struct b_command - struct of a builtin command
  * @function: callback function
  * @name: builtin command
  *
  * Description: Necessary variables needed to a builtin command
  */
-typedef struct builtin_command
+typedef struct b_command
 {
 	fun function;
 	const char *name;
-} builtin_command;
+} b_command;
 
 /**
  * struct shell_t - Necessary variables needed to simple_shell
  * @command_line: bufer where we strore the _getline, of MAX_LEN size.
  * @path_dirs: array of dirs
+ * @name: program name
  * @command_len: lenght of the string entered by the user
  * @argv: Don't know
  * @exit_code: code return exit
@@ -56,6 +57,7 @@ typedef struct shell_t
 {
 	char command_line[MAX_LEN];
 	char *path_dirs[512];
+	const char *name;
 	int command_len;
 	char *argv[512];
 	char exit_code;
@@ -65,12 +67,12 @@ typedef struct shell_t
 	char tty;
 
 	/* buitin */
-	builtin_command *builtin_list;
+	b_command *builtin_list;
 	fun builtin_fun;
 } shell_t;
 
 /* Functions for simple_shell*/
-shell_t *init_shell(shell_t *, builtin_command *);
+shell_t *init_shell(shell_t *, b_command *, const char *);
 void __attribute__((constructor)) init();
 int exec(shell_t *, char *, char *);
 void error_printer(char *, char *);

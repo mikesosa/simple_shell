@@ -3,10 +3,11 @@
  * init_shell - Initializes variables from shell
  * @shell: global struct shell
  * @builtin_list: list of the builtin commands
+ * @name: name executable
  *
  * Return: void
  */
-shell_t *init_shell(shell_t *shell, builtin_command *builtin_list)
+shell_t *init_shell(shell_t *shell, b_command *builtin_list, const char *name)
 {
 	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
 	shell->tty = isatty(STDIN_FILENO) + ~isatty(STDOUT_FILENO);
@@ -16,6 +17,7 @@ shell_t *init_shell(shell_t *shell, builtin_command *builtin_list)
 	shell->builtin_list = builtin_list;
 	shell->path = _getenv("PATH");
 	shell->exit_code = 0;
+	shell->name = name;
 
 	if (shell->path && strtok(shell->path, ":\n"))
 	{
@@ -104,7 +106,7 @@ int exec_command(shell_t *shell)
 		if (!r && errno)
 		{
 			/* Print error if command doesn't exist */
-			perror(shell->command);
+			perror(shell->name);
 			errno = 0;
 		}
 	}
