@@ -23,9 +23,27 @@ void builtin_exit(void *shell)
 void builtin_cd(void *shell)
 {
 	shell_t *shell_tmp = (shell_t *) shell;
+	static char old_path[120] = {0};
 	char **argv = shell_tmp->argv;
+	char path[120] = {0};
 
-	chdir(argv[1]);
+	/* We copy the path that the user sent us */
+	if (argv[1])
+		_strcpy(path, argv[1]);
+
+	if (!argv[1] || argv[1][0] == '~')
+	{
+		_strcpy(path, _getenv("HOME"));
+		if (argv[1])
+			_strcat(path, &argv[1][1]);
+	}
+	else if (argv[1][0] == '-')
+	{
+		_strcpy(path, old_path);
+	}
+
+	getcwd(old_path, sizeof(old_path));
+	chdir(path);
 }
 /**
  * is_builtin - search builtin command

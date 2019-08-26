@@ -23,9 +23,10 @@ int _strcmp(const char *s1, const char *s2)
 }
 /**
  * *_strcpy - pasing values to other array
- * @src: Soure
  * @dest: Destiny
- * Return: Void;
+ * @src: Soure
+ *
+ * Return: void
  */
 char *_strcpy(char *dest, char *src)
 {
