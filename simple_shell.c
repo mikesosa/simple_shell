@@ -10,8 +10,8 @@
 shell_t *init_shell(shell_t *shell, b_command *builtin_list, const char *name)
 {
 	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
-	shell->tty = isatty(STDIN_FILENO) + ~isatty(STDOUT_FILENO);
-	errno = 0;
+	shell->tty = isatty(STDIN_FILENO);
+	errno = 0;  /* Flush extern errno variable */
 	int i = 0;
 
 	shell->builtin_list = builtin_list;
