@@ -87,6 +87,7 @@ void signal_killer(int);
 /* buitin */
 int is_builtin(shell_t *shell);
 void builtin_exit(void *shell);
+void builtin_env(void *shell);
 void builtin_cd(void *shell);
 
 /* Functions for getting strings*/
