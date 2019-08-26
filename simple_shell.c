@@ -19,9 +19,9 @@ shell_t *init_shell(shell_t *shell, b_command *builtin_list, const char *name)
 	shell->exit_code = 0;
 	shell->name = name;
 
-	if (shell->path && strtok(shell->path, ":\n"))
+	if (shell->path && _strtok(shell->path, ":\n"))
 	{
-		while ((shell->path_dirs[i] = strtok(NULL, ":\n")))
+		while ((shell->path_dirs[i] = _strtok(NULL, ":\n")))
 			i++;
 	}
 
@@ -37,7 +37,7 @@ shell_t *init_shell(shell_t *shell, b_command *builtin_list, const char *name)
  * read_command - reads the command entered by the user
  * @shell: global struct shell
  * A: strlock to get the first token entered
- * B: strdup because strtok modifies the original string so we keep a copy
+ * B: strdup because _strtok modifies the original string so we keep a copy
  * C: The first argument of owr shell will be the first token
  *
  * Return: return 1 if there is a new line digit
@@ -55,7 +55,7 @@ int read_command(shell_t *shell)
 	{
 		if (shell->command_line[0] != '\n')
 		{
-			shell->command = strtok(shell->command_line, " \n"); /* A */
+			shell->command = _strtok(shell->command_line, " \n"); /* A */
 			shell->command = _strdup(shell->command_line); /* B */
 			shell->argv[0] = shell->command; /* C */
 
@@ -64,7 +64,7 @@ int read_command(shell_t *shell)
 				return (false);
 
 			/* We save the rest of the arguments user entered */
-			for (c = 1; (shell->argv[c] = strtok(NULL, " \n")); c++)
+			for (c = 1; (shell->argv[c] = _strtok(NULL, " \n")); c++)
 				shell->argv[c] = _strdup(shell->argv[c]);
 
 			/* Set the last element of the array to NULL */
