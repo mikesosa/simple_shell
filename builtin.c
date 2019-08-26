@@ -26,7 +26,6 @@ void builtin_cd(void *shell)
 	char **argv = shell_tmp->argv;
 
 	chdir(argv[1]);
-	errno = 0;
 }
 /**
  * is_builtin - search builtin command
