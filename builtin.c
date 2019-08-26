@@ -50,6 +50,22 @@ void builtin_cd(void *shell)
 	chdir(path);
 }
 /**
+ * builtin_cd - change working directory
+ * @shell: global shell struct
+ *
+ * Return: void
+ */
+void builtin_env(__attribute((unused))void *shell)
+{
+	int i;
+
+	for (i = 0; __environ[i]; i++)
+	{
+		_puts(__environ[i]);
+		_putchar('\n');
+	}
+}
+/**
  * is_builtin - search builtin command
  * @shell: global shell struct
  *

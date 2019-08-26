@@ -11,6 +11,7 @@ int main(__attribute((unused))int argc, char *argv[])
 {
 	b_command builtin_list[] = {
 		{builtin_exit, "exit"},
+		{builtin_env, "env"},
 		{builtin_cd, "cd"},
 		{NULL, NULL}
 	};
