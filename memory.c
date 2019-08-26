@@ -9,11 +9,11 @@ void free_args(shell_t *shell)
 {
 	int i = 0;
 
-	if (!shell->tty)
-		i = 1;
-
 	for (; shell->argv[i]; i++)
+	{
 		free(shell->argv[i]);
+		shell->argv[i] = NULL;
+	}
 }
 /**
  * _memset - fill memory with a constant byte

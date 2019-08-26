@@ -36,9 +36,6 @@ int _readline(shell_t *shell)
 {
 	_memset(shell->command_line, 0, sizeof(shell->command_line));
 
-	if (!shell->tty)
-		return (false);
-
 	shell->command_len = read(STDIN_FILENO, shell->command_line, MAX_LEN);
 	deblank(shell); /* deleten spaces */
 

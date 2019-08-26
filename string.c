@@ -106,5 +106,5 @@ void deblank(shell_t *shell)
 			j--;
 	}
 
-	input[j - ((shell->tty) ? 1 : 0)] = '\0';
+	input[j - ((shell->tty & 1) ? 1 : 0)] = '\0';
 }

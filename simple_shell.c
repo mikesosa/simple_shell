@@ -10,7 +10,7 @@
 shell_t *init_shell(shell_t *shell, b_command *builtin_list, const char *name)
 {
 	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
-	shell->tty = isatty(STDIN_FILENO);
+	shell->tty = isatty(STDIN_FILENO) + (isatty(STDOUT_FILENO) ? 2 : 0);
 	errno = 0;  /* Flush extern errno variable */
 	int i = 0;
 
@@ -46,8 +46,7 @@ int read_command(shell_t *shell)
 {
 	int c = 0, r = 0;
 
-	/* If getline returns true */
-	if (shell->tty)
+	if (shell->tty & 1)
 		r = _readline(shell);
 	else
 		r = _getline(shell);
@@ -110,7 +109,7 @@ int exec_command(shell_t *shell)
 			errno = 0;
 		}
 	}
-	else if (!shell->run && shell->tty)
+	else if (!shell->run && (shell->tty == 3))
 	{
 		/* Print \n if EOF and its a tty */
 		_puts("\n");
@@ -119,7 +118,7 @@ int exec_command(shell_t *shell)
 		return (-1);
 	}
 	else
-		return (shell->tty ? -2 : -1); /* If the user gives a single enter */
+		return ((shell->tty & 2) ? -2 : -1); /* If the user gives a single enter */
 
 	return (false);
 }
@@ -132,7 +131,7 @@ int exec_command(shell_t *shell)
  */
 void print_prompt_tty(shell_t *shell)
 {
-	if (!shell || (shell && shell->tty))
+	if (!shell || (shell && (shell->tty == 3)))
 		_puts("#cisfun$ ");
 
 	fflush(stdout);
