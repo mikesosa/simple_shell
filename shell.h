@@ -84,7 +84,7 @@ int read_command(shell_t *);
 void free_args(shell_t *);
 void signal_killer(int);
 
-/* buitin */
+/* builtin */
 int is_builtin(shell_t *shell);
 void builtin_exit(void *shell);
 void builtin_env(void *shell);
