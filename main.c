@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * main - a while loop with all the necesary functions to run shell
  *
@@ -6,6 +7,12 @@
  */
 int main(void)
 {
+	builtin_command builtin_list[] = {
+		{builtin_exit, "exit"},
+		{builtin_cd, "cd"},
+		{NULL, NULL}
+	};
+
 	/* We create structure that will use the entire program */
 	shell_t shell;
 
@@ -13,7 +20,7 @@ int main(void)
 	signal(SIGINT, signal_killer);
 
 	/* Fill in some fields of the structure */
-	init_shell(&shell);
+	init_shell(&shell, builtin_list);
 
 	while (shell.run)
 	{
@@ -27,5 +34,5 @@ int main(void)
 	}
 
 	/* Returns false if there is no errors */
-	return (false);
+	return (shell.exit_code);
 }

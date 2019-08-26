@@ -12,11 +12,28 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <errno.h>
 
 #define MAX_BUF_NOTTY 4096
 #define MAX_LEN 1024
 #define false 0
 #define true 1
+
+/* Prototype builtin functions */
+typedef void (*fun)(void *);
+
+/**
+ * struct builtin_command - struct of a builtin command
+ * @function: callback function
+ * @name: builtin command
+ *
+ * Description: Necessary variables needed to a builtin command
+ */
+typedef struct builtin_command
+{
+	fun function;
+	const char *name;
+} builtin_command;
 
 /**
  * struct shell_t - Necessary variables needed to simple_shell
@@ -24,10 +41,13 @@
  * @path_dirs: array of dirs
  * @command_len: lenght of the string entered by the user
  * @argv: Don't know
+ * @exit_code: code return exit
  * @command: Don't know
  * @path: Don't know
  * @run: Run always true since our main loop will always be reading
  * @tty: teletype tell us if the given file descriptor is a terminal
+ * @builtin_list: list of the builtin commands
+ * @builtin_fun: callback function
  *
  * Description: Necessary variables needed to simple_shell
  * for Holberton project
@@ -38,24 +58,34 @@ typedef struct shell_t
 	char *path_dirs[512];
 	int command_len;
 	char *argv[512];
+	char exit_code;
 	char *command;
 	char *path;
 	char run;
 	char tty;
+
+	/* buitin */
+	builtin_command *builtin_list;
+	fun builtin_fun;
 } shell_t;
 
 /* Functions for simple_shell*/
+shell_t *init_shell(shell_t *, builtin_command *);
 void __attribute__((constructor)) init();
 int exec(shell_t *, char *, char *);
 void error_printer(char *, char *);
 void *_memset(void *, int, size_t);
 void print_prompt_tty(shell_t *);
-shell_t *init_shell(shell_t *);
 int exec_command(shell_t *);
 char *_getenv(const char *);
 int read_command(shell_t *);
 void free_args(shell_t *);
 void signal_killer(int);
+
+/* buitin */
+int is_builtin(shell_t *shell);
+void builtin_exit(void *shell);
+void builtin_cd(void *shell);
 
 /* Functions for getting strings*/
 int _strcmp(const char *s1, const char *);

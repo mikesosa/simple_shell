@@ -2,16 +2,20 @@
 /**
  * init_shell - Initializes variables from shell
  * @shell: global struct shell
+ * @builtin_list: list of the builtin commands
  *
  * Return: void
  */
-shell_t *init_shell(shell_t *shell)
+shell_t *init_shell(shell_t *shell, builtin_command *builtin_list)
 {
 	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
 	shell->tty = isatty(STDIN_FILENO);
+	errno = 0;
 	int i = 0;
 
+	shell->builtin_list = builtin_list;
 	shell->path = _getenv("PATH");
+	shell->exit_code = 0;
 
 	if (shell->path && strtok(shell->path, ":\n"))
 	{
@@ -19,6 +23,7 @@ shell_t *init_shell(shell_t *shell)
 			i++;
 	}
 
+	/* Set guardian to NULL for halt loop */
 	shell->path_dirs[i] = NULL;
 
 	/* Run always true so it will be reading all the time */
@@ -79,12 +84,16 @@ int read_command(shell_t *shell)
  */
 int exec_command(shell_t *shell)
 {
-	int i, r = 0;
+	int i, r = 0, builtin = 0;
 
 	/* If the command was read succesfully */
 	if (read_command(shell) && shell->command_line[0])
 	{
-		if (!shell->path_dirs[0] || shell->path[0] == ':')
+		builtin = is_builtin(shell);
+
+		if (builtin)
+			shell->builtin_fun(shell);
+		else if (!shell->path_dirs[0] || shell->path[0] == ':')
 			r = exec(shell, NULL, shell->command_line);
 		else
 		{
@@ -92,9 +101,12 @@ int exec_command(shell_t *shell)
 				r = exec(shell, shell->path_dirs[i], shell->command_line);
 		}
 
-		if (!r)
+		if (!r && errno)
+		{
 			/* Print error if command doesn't exist */
 			perror(shell->command);
+			errno = 0;
+		}
 	}
 	else if (!shell->run && shell->tty)
 	{

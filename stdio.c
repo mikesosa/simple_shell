@@ -34,7 +34,7 @@ int _putchar(char c)
  */
 int _readline(shell_t *shell)
 {
-	memset(shell->command_line, 0, sizeof(shell->command_line));
+	_memset(shell->command_line, 0, sizeof(shell->command_line));
 
 	if (!shell->tty)
 		return (false);
@@ -91,7 +91,7 @@ int _getline(shell_t *shell)
 					pos += ++iline;
 				}
 				else
-					/* when the entry does not end in line break */
+					/* When the entry does not end in line break */
 					shell->command_line[iline] = buf[pos];
 
 				return (iline);
