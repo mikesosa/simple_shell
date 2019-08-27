@@ -78,15 +78,10 @@ int read_command(shell_t *shell)
 					shell->argv[c] = NULL;
 					break;
 				}
-
 				shell->argv[c] = _strdup(shell->argv[c]);
 			}
-
-			printf("len arguments: %d\n", c);
-
 			variables(shell);
-			/* Set the last element of the array to NULL */
-			shell->argv[c] = NULL;
+			shell->argv[c] = NULL;/* Set the last element of the array to NULL */
 			return (true);
 		}
 	}
