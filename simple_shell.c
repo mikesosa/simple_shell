@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * init_shell - Initializes variables from shell
  * @shell: global struct shell
@@ -7,12 +8,14 @@
  *
  * Return: void
  */
+
 shell_t *init_shell(shell_t *shell, b_command *builtin_list, const char *name)
 {
 	int i = 0;
+
 	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
 	shell->tty = isatty(STDIN_FILENO) + (isatty(STDOUT_FILENO) ? 2 : 0);
-	errno = 0;  /* Flush extern errno variable */
+	errno = 0;/* Flush extern errno variable */
 
 	shell->builtin_list = builtin_list;
 	shell->path = _getenv("PATH");

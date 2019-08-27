@@ -9,6 +9,7 @@
  */
 int main(__attribute((unused))int argc, char *argv[])
 {
+	/*Builtin functions*/
 	b_command builtin_list[] = {
 		{builtin_exit, "exit"},
 		{builtin_env, "env"},
@@ -22,10 +23,10 @@ int main(__attribute((unused))int argc, char *argv[])
 	/* 2 Interrupt the process if Ctrl+C */
 	signal(SIGINT, signal_killer);
 
-	/* Fill in some fields of the structure */
+	/* Fill in some variables of the structure */
 	init_shell(&shell, builtin_list, argv[0]);
 
-	while (shell.run)
+	while (shell.run)/*this loop keeps the shell running*/
 	{
 
 		/* We print promt only if it's a tty */
