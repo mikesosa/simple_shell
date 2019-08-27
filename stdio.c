@@ -66,7 +66,7 @@ int _getline(shell_t *shell)
 {
 	static char buf[MAX_BUF_NOTTY] = {0};
 	static int len, pos;
-	size_t fd = STDIN_FILENO;
+	int fd = STDIN_FILENO;
 	int iline = 0;
 
 	if (shell->main_argv[1])
