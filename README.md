@@ -34,6 +34,18 @@
 							<td><code>env.c</code></td>
 							<td>Function in charge of getting the global enviroment and pass it to our shell.</td>
 						</tr>
+						<tr>
+							<td><code>exec.c</code></td>
+							<td>Executes a function after it finds the rigth path of it.</td>
+						</tr>
+						<tr>
+							<td><code>main.c</code></td>
+							<td>Main function when we control every subfunction for execution of the program.</td>
+						</tr>
+						<tr>
+							<td><code>memory.c</code></td>
+							<td>In charge of freeing the memory and setting it to zero.</td>
+						</tr>
 					</tbody>
 				</table>
 				<hr>
