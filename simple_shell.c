@@ -75,12 +75,14 @@ int read_command(shell_t *shell)
 			{
 				if (shell->argv[c][0] == '#')
 				{
-					shell->argv[1] = NULL;
+					shell->argv[c] = NULL;
 					break;
 				}
 
 				shell->argv[c] = _strdup(shell->argv[c]);
 			}
+
+			printf("len arguments: %d\n", c);
 
 			variables(shell);
 			/* Set the last element of the array to NULL */
