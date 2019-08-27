@@ -17,7 +17,7 @@
 				<table>
 					<thead>
 						<tr>
-							<th>Directory</th>
+							<th>File</th>
 							<th>Description</th>
 						</tr>
 					</thead>
@@ -61,6 +61,10 @@
 						<tr>
 							<td><code>stdio.c</code></td>
 							<td>Our _getline function and all it's necessary subfunctions for it to work properlly.</td>
+						</tr>
+						<tr>
+							<td><code>string.c</code></td>
+							<td>Handling string functions like strlen, strdup, strcpy etc.</td>
 						</tr>
 					</tbody>
 				</table>
