@@ -77,18 +77,26 @@
 					Examples and Usage
 				</h3>
 				<ul>
-					<li>Language: C, Bash</li>
-					<li>Operating System: Ubuntu 14.04 LTS (Trusty64)</li>
-					<li>Style: Holberton Betty</li>
-					<li>Compiler: gcc 4.8.4 with flags -Wall -Werror -Wextra -pedantic</li>
-					<li>Version Control: Git</li>
+					<h4>Compilation:</h4>
+					<p>To compile please use the following command:</p>
+					<code><strong>#shellyta$ </strong>gcc -Wall -Werror -Wextra -pedantic *.c -o hsh</code>
+					<p>That command will generate an excecutable file namen hsh. In order to excecute it please type the following command:</p>
+					<code><strong>#shellyta$ </strong>./hsh</code>
+					<p>Done!</p>
+					<h4>Examples of usage:</h4>
+					<p>You can use "shellyta" pretty much like a the normal Shell:</p>
+					<li><code><strong>#shellyta$ </strong>ls</code></li>
+					<li><code><strong>#shellyta$ </strong>ls -la</code></li>
+					<li><code><strong>#shellyta$ </strong>cd ../</code></li>
+					<li><code><strong>#shellyta$ </strong>echo "Hello World"</code></li>
+					<p>etc....Enjoy!</p>
 				</ul>
 				<hr>
 				<h3>
 					Technologies Used
 				</h3>
 				<ul>
-					<li><code><strong>#shellyta$</strong> ls</code></li>
+					<li>Language: C, Bash</li>
 					<li>Operating System: Ubuntu 14.04 LTS (Trusty64)</li>
 					<li>Style: Holberton Betty</li>
 					<li>Compiler: gcc 4.8.4 with flags -Wall -Werror -Wextra -pedantic</li>
