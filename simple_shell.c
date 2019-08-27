@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * init_shell - Initializes variables from shell
  * @shell: global struct shell
@@ -9,11 +10,12 @@
  */
 shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
 {
+	int i = 0;
+
 	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
 	shell->tty = (isatty(STDIN_FILENO) && !argv[1]);
 	shell->tty += (isatty(STDOUT_FILENO) ? 2 : 0);
 	errno = 0; /* Flush extern errno variable */
-	int i = 0;
 
 	shell->builtin_list = builtin_list;
 	shell->path = _getenv("PATH");
@@ -21,10 +23,9 @@ shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
 	shell->name = argv[0];
 	shell->exit_code = 0;
 
-	/* Convert the PATH into an array of strings */
-	if (shell->path && strtok(shell->path, ":\n"))
+	if (shell->path && _strtok(shell->path, ":\n"))
 	{
-		while ((shell->path_dirs[i] = strtok(NULL, ":\n")))
+		while ((shell->path_dirs[i] = _strtok(NULL, ":\n")))
 			i++;
 	}
 
@@ -40,7 +41,7 @@ shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
  * read_command - reads the command entered by the user
  * @shell: global struct shell
  * A: strlock to get the first token entered
- * B: strdup because strtok modifies the original string so we keep a copy
+ * B: strdup because _strtok modifies the original string so we keep a copy
  * C: The first argument of owr shell will be the first token
  *
  * Return: return 1 if there is a new line digit
@@ -58,7 +59,7 @@ int read_command(shell_t *shell)
 	{
 		if (shell->command_line[0] != '\n')
 		{
-			shell->command = strtok(shell->command_line, " \n"); /* A */
+			shell->command = _strtok(shell->command_line, " \n"); /* A */
 			shell->command = _strdup(shell->command_line); /* B */
 			shell->argv[0] = shell->command; /* C */
 
@@ -67,7 +68,7 @@ int read_command(shell_t *shell)
 				return (false);
 
 			/* We save the rest of the arguments user entered */
-			for (c = 1; (shell->argv[c] = strtok(NULL, " \n")); c++)
+			for (c = 1; (shell->argv[c] = _strtok(NULL, " \n")); c++)
 				shell->argv[c] = _strdup(shell->argv[c]);
 
 			/* Set the last element of the array to NULL */
@@ -135,7 +136,7 @@ int exec_command(shell_t *shell)
 void print_prompt_tty(shell_t *shell)
 {
 	if (!shell || (shell && (shell->tty == 3)))
-		_puts("#cisfun$ ");
+		_puts("\x1B[1;33m#cisfun$\x1B[0m "); /*Prints the promt in color*/
 
 	fflush(stdout);
 }

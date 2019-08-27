@@ -13,6 +13,7 @@ void builtin_exit(void *shell)
 	/* Exit of the shell with error */
 	shell_tmp->exit_code = argv[1] ? atoi(argv[1]) : 0;
 	shell_tmp->run = 0;
+	errno = 0;
 }
 /**
  * builtin_cd - change working directory
@@ -48,6 +49,7 @@ void builtin_cd(void *shell)
 
 	getcwd(old_path, sizeof(old_path));
 	chdir(path);
+	errno = 0;
 }
 /**
  * builtin_env - print enviroment
@@ -64,6 +66,7 @@ void builtin_env(__attribute((unused))void *shell)
 		_puts(__environ[i]);
 		_putchar('\n');
 	}
+	errno = 0;
 }
 /**
  * builtin_history - print history of commans
@@ -93,6 +96,7 @@ int is_builtin(shell_t *shell)
 			return (true);
 		}
 	}
+	errno = 0;
 
 	return (false);
 }

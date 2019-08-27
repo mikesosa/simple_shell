@@ -12,11 +12,11 @@ char *_getenv(const char *name)
 
 	for (i = 0; __environ[i]; i++)
 	{
-		key = strtok(__environ[i], "=\n");
+		key = _strtok(__environ[i], "=\n");
 
 		if (!_strcmp(key, name))
 		{
-			value = strtok(NULL, "=\n");
+			value = _strtok(NULL, "=\n");
 			break;
 		}
 

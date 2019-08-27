@@ -69,21 +69,20 @@ size_t _strcspn(char *s, const char *reject)
  */
 size_t _strspn(char *s, const char *accept)
 {
-	int i, k, counter = 0;
+	int i, j, c = 0;
 
 	for (i = 0; s[i] != '\0'; i++)
 	{
-		if (counter != i)
+		for (j = 0; accept[j] != '\0'; j++)
 		{
-			break;
-		}
-		for (k = 0; s[k] != '\0'; k++)
-		{
-			if (s[i] == accept[k])
+			if (s[i] == accept[j])
 			{
-				counter++;
+				c++;
+				break;
 			}
 		}
+		if (accept[j] == '\0')
+			break;
 	}
-	return (counter);
+	return (c);
 }

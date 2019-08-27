@@ -9,6 +9,7 @@
  */
 int main(__attribute((unused))int argc, char *argv[])
 {
+	/* Builtin functions */
 	b_command builtin_list[] = {
 		{builtin_history, "history"},
 		{builtin_exit, "exit"},
@@ -26,7 +27,7 @@ int main(__attribute((unused))int argc, char *argv[])
 	/* Fill in some fields of the structure */
 	init_shell(&shell, builtin_list, argv);
 
-	while (shell.run)
+	while (shell.run) /* This loop keeps the shell running */
 	{
 
 		/* We print promt only if it's a tty */

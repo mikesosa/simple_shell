@@ -68,7 +68,6 @@ typedef struct shell_t
 	char run;
 	char tty;
 
-
 	/* buitin */
 	b_command *builtin_list;
 	fun builtin_fun;
@@ -87,7 +86,6 @@ int read_command(shell_t *);
 void free_args(shell_t *);
 void signal_killer(int);
 
-/* buitin */
 void builtin_history(void *shell);
 int is_builtin(shell_t *shell);
 void builtin_exit(void *shell);
