@@ -65,18 +65,18 @@ int _readline(shell_t *shell)
 int _getline(shell_t *shell)
 {
 	static char buf[MAX_BUF_NOTTY] = {0};
-	static int read_len, pos;
+	static int len, pos;
 	size_t fd = STDIN_FILENO;
 	int iline = 0;
 
 	if (shell->main_argv[1])
 		fd = open(shell->main_argv[1], O_RDWR);
 
-	while (fd != -1 && (pos < read_len || (read_len = read(fd, buf, sizeof(buf)))))
+	while (fd != -1 && (pos < len || (len = read(fd, buf, sizeof(buf)))))
 	{
-		while (pos < read_len && pos < MAX_BUF_NOTTY)
+		while (pos < len && pos < MAX_BUF_NOTTY)
 		{
-			if (buf[pos] == '\n' || (pos == read_len - 1 && pos != MAX_BUF_NOTTY))
+			if (buf[pos] == '\n' || (pos == len - 1 && pos != MAX_BUF_NOTTY))
 			{
 				if (buf[pos] == '\n' && iline)
 				{
@@ -99,7 +99,7 @@ int _getline(shell_t *shell)
 		}
 		if (pos == MAX_BUF_NOTTY)
 		{
-			_memset(buf, 0, read_len);
+			_memset(buf, 0, len);
 			pos = 0;
 		}
 	}

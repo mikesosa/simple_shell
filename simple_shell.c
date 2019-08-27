@@ -4,7 +4,7 @@
  * init_shell - Initializes variables from shell
  * @shell: global struct shell
  * @builtin_list: list of the builtin commands
- * @name: name executable
+ * @argv: argv of the main function
  *
  * Return: void
  */
@@ -54,7 +54,6 @@ int read_command(shell_t *shell)
 		r = _readline(shell);
 	else
 		r = _getline(shell);
-
 	if (r)
 	{
 		if (shell->command_line[0] != '\n')
@@ -62,7 +61,6 @@ int read_command(shell_t *shell)
 			shell->command = _strtok(shell->command_line, " \n"); /* A */
 			shell->command = _strdup(shell->command_line); /* B */
 			shell->argv[0] = shell->command; /* C */
-
 			/* If user types \n with no commands */
 			if (_strcmp(shell->argv[0], "\n") == 0)
 				return (false);
@@ -72,7 +70,6 @@ int read_command(shell_t *shell)
 				shell->argv[1] = NULL;
 				return (false);
 			}
-
 			/* We save the rest of the arguments user entered */
 			for (c = 1; (shell->argv[c] = _strtok(NULL, " \n")); c++)
 			{
@@ -82,6 +79,7 @@ int read_command(shell_t *shell)
 				shell->argv[c] = _strdup(shell->argv[c]);
 			}
 
+			variables(shell);
 			/* Set the last element of the array to NULL */
 			shell->argv[c] = NULL;
 			return (true);
@@ -89,7 +87,6 @@ int read_command(shell_t *shell)
 	}
 	else
 		shell->run = false; /* If _getline could not read */
-
 	return (false);
 }
 /**

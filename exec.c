@@ -35,6 +35,7 @@ int exec(shell_t *shell, char *path_bin, char *cmd)
 {
 	char full_path[120] = {0};
 	const char *delim = "/";
+	int status = 0;
 
 	if (cmd[0] != delim[0] && path_bin)
 	{
@@ -57,7 +58,14 @@ int exec(shell_t *shell, char *path_bin, char *cmd)
 		}
 		else
 		{
-			wait(NULL); /* To sincronyse parent and child processes */
+			wait(&status); /* To sincronyse parent and child processes */
+
+
+			if (WIFEXITED(status))
+			{
+				shell->exit_code_child = WEXITSTATUS(status);
+			}
+
 			return (true);
 		}
 	}

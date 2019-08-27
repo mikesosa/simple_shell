@@ -39,8 +39,9 @@ typedef struct b_command
  * struct shell_t - Necessary variables needed to simple_shell
  * @command_line: bufer where we strore the _getline, of MAX_LEN size.
  * @path_dirs: array of dirs
+ * @exit_code_child: exit code child
  * @name: program name
- * main_argv: args vector
+ * @main_argv: args vector
  * @command_len: lenght of the string entered by the user
  * @argv: Don't know
  * @exit_code: code return exit
@@ -58,6 +59,7 @@ typedef struct shell_t
 {
 	char command_line[MAX_LEN];
 	char *path_dirs[512];
+	int exit_code_child;
 	const char *name;
 	char **main_argv;
 	int command_len;
@@ -91,6 +93,9 @@ int is_builtin(shell_t *shell);
 void builtin_exit(void *shell);
 void builtin_env(void *shell);
 void builtin_cd(void *shell);
+
+/* Variables */
+void variables(shell_t *shell);
 
 /* Functions for getting strings*/
 int _strcmp(const char *s1, const char *);
