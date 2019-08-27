@@ -104,6 +104,7 @@
 					<li>Style: Holberton Betty</li>
 					<li>Compiler: gcc 4.8.4 with flags -Wall -Werror -Wextra -pedantic</li>
 					<li>Version Control: Git</li>
+					<li>Test Suite: We have created a <a href="https://github.com/luischaparroc/bog-0619_shell_test_suite" target="n_blank">Test Suite</a> in order to test the functionality of our shell</li>
 				</ul>
 				<hr>
 				<h3>
