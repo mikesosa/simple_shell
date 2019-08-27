@@ -52,7 +52,15 @@
 						</tr>
 						<tr>
 							<td><code>signal_killer.c</code></td>
-							<td>It's name says it all lol. In charge of taking Ctrl + C signals.</td>
+							<td>It's name says it all lol. In charge of taking Ctrl + C signals and kill them.</td>
+						</tr>
+						<tr>
+							<td><code>simple_shell.c</code></td>
+							<td>Initializes shell, prints prompt, reads the line and excutes commands.</td>
+						</tr>
+						<tr>
+							<td><code>stdio.c</code></td>
+							<td>Our _getline function and all it's necessary subfunctions for it to work properlly.</td>
 						</tr>
 					</tbody>
 				</table>
