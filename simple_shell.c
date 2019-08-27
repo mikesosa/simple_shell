@@ -74,14 +74,14 @@ int read_command(shell_t *shell)
 			for (c = 1; (shell->argv[c] = _strtok(NULL, " \n")); c++)
 			{
 				if (shell->argv[c][0] == '#')
+				{
+					shell->argv[c] = NULL;
 					break;
-
+				}
 				shell->argv[c] = _strdup(shell->argv[c]);
 			}
-
 			variables(shell);
-			/* Set the last element of the array to NULL */
-			shell->argv[c] = NULL;
+			shell->argv[c] = NULL;/* Set the last element of the array to NULL */
 			return (true);
 		}
 	}
@@ -144,7 +144,7 @@ int exec_command(shell_t *shell)
 void print_prompt_tty(shell_t *shell)
 {
 	if (!shell || (shell && (shell->tty == 3)))
-		_puts("\x1B[1;33m#cisfun$\x1B[0m "); /*Prints the promt in color*/
+		_puts("\x1B[1;33m#shellyta$\x1B[0m "); /*Prints the promt in color*/
 
 	fflush(stdout);
 }
