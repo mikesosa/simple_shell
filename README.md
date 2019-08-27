@@ -66,6 +66,10 @@
 							<td><code>string.c</code></td>
 							<td>Handling string functions like strlen, strdup, strcpy etc.</td>
 						</tr>
+						<tr>
+							<td><code>variables.c</code></td>
+							<td>In charge of replacing arguments with variables ($? and $$)</td>
+						</tr>
 					</tbody>
 				</table>
 				<hr>

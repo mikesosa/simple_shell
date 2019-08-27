@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * itoa - convert integer to string
  * @n: integer
@@ -23,6 +24,7 @@ int itoa(int n, char s[])
 
 	return (i);
 }
+
 /**
  * variable_handler - replace arguments with variables
  * @shell: global shell struct
@@ -43,6 +45,7 @@ void variable_handler(shell_t *shell, size_t index)
 	free(shell->argv[index]);
 	shell->argv[index] = _strdup(buf);
 }
+
 /**
  * variables - search variables in arguments
  * @shell: global shell struct
@@ -58,7 +61,6 @@ void variables(shell_t *shell)
 		"$?", /* exit code child's */
 		NULL
 	};
-
 	for (i = 0; variables_list[i]; i++)
 	{
 		for (j = 0; shell->argv[j]; j++)
