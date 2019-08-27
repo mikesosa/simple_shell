@@ -3,7 +3,7 @@
 	<body>
 			<article>
 				<h1>
-					Building our own Shell (Shellita)
+					Building our own Shell (Shellyta)
 				</h1>
 				<h2>
 					Introduction
@@ -60,7 +60,7 @@
 						</tr>
 						<tr>
 							<td><code>stdio.c</code></td>
-							<td>Our _getline function and all it's necessary subfunctions for it to work properlly.</td>
+							<td>Our getline function and all it's necessary subfunctions for it to work properlly.</td>
 						</tr>
 						<tr>
 							<td><code>string.c</code></td>
@@ -88,7 +88,7 @@
 					<li><code><strong>#shellyta$ </strong>ls</code></li>
 					<li><code><strong>#shellyta$ </strong>ls -la</code></li>
 					<li><code><strong>#shellyta$ </strong>cd ../</code></li>
-					<li><code><strong>#shellyta$ </strong>echo "Hello World"</code><li>
+					<li><code><strong>#shellyta$ </strong>echo "Hello World"</code></li>
 					<h4>How to exit?</h4>
 					<p>You might already notice that CTRL+C is disabled, so you can simple tipe exit or press CTRL+D:</p>
 					<code><strong>#shellyta$ </strong>exit</code>
