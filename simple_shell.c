@@ -4,7 +4,7 @@
  * init_shell - Initializes variables from shell
  * @shell: global struct shell
  * @builtin_list: list of the builtin commands
- * @name: name executable
+ * @argv: name executable
  *
  * Return: void
  */
