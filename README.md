@@ -91,7 +91,7 @@
 					<li><code><strong>#shellyta$ </strong>echo "Hello World"</code></li>
 					<h4>How to exit?</h4>
 					<p>You might already notice that CTRL+C is disabled, so you can simple tipe exit or press CTRL+D:</p>
-					<code><strong>#shellyta$ </strong>exit</code>
+					<code><strong>#shellyta$ </strong>exit</code><br>
 					<p>Enjoy!</p>
 				</ul>
 				<hr>

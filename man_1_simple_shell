@@ -41,3 +41,28 @@ env - prints the enviornment variables
 cd - change the directory to the one you pass after.
 
 exit - quits the program.
+
+.SH EXIT STATUS
+Errors that are detected by the shell, such as a syntax error, will cause the shell to exit with a non-zero exit status.  If the shell is not an interactive shell, the execution of the shell file will be aborted.  Otherwise the shell will return the exit status of the last command executed. Type "echo $?" to see the error status.
+
+.SH OPTIONS
+No options currently exist for this hsh or simple_shell command. However, there are options for the PATH commands..
+
+.SH COMMENTS
+This is a project we made to learn about the inner workings of a Unix shell. Many computer science concepts were practiced as we built this. Other non-technical skills were practiced like remote working, communicating over different time zones, and peer programming.
+
+.SH BUGS
+So far no known bugs. If any are found or encountered, please submit the process of what you were doing before the crash to 833@holbertonschool.com. A processing fee will be required to fix this beautiful product.
+
+.SH PARAMETERS
+As many as you want, follow the synopsis format above.
+
+.SH AUTHORS
+Daniel Rodriguez 922@holbertonschool.com
+
+Michael Sosa 833@holbertonschool.com
+
+.SH SEE ALSO
+man sh
+
+Bash Reference Manual, Brian Fox and Chet Ramey
