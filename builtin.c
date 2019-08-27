@@ -50,7 +50,7 @@ void builtin_cd(void *shell)
 	chdir(path);
 }
 /**
- * builtin_cd - change working directory
+ * builtin_env - print enviroment
  * @shell: global shell struct
  *
  * Return: void
@@ -64,6 +64,16 @@ void builtin_env(__attribute((unused))void *shell)
 		_puts(__environ[i]);
 		_putchar('\n');
 	}
+}
+/**
+ * builtin_history - print history of commans
+ * @shell: global shell struct
+ *
+ * Return: void
+ */
+void builtin_history(__attribute((unused))void *shell)
+{
+	;
 }
 /**
  * is_builtin - search builtin command

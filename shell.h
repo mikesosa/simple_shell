@@ -40,6 +40,7 @@ typedef struct b_command
  * @command_line: bufer where we strore the _getline, of MAX_LEN size.
  * @path_dirs: array of dirs
  * @name: program name
+ * main_argv: args vector
  * @command_len: lenght of the string entered by the user
  * @argv: Don't know
  * @exit_code: code return exit
@@ -58,6 +59,7 @@ typedef struct shell_t
 	char command_line[MAX_LEN];
 	char *path_dirs[512];
 	const char *name;
+	char **main_argv;
 	int command_len;
 	char *argv[512];
 	char exit_code;
@@ -66,13 +68,14 @@ typedef struct shell_t
 	char run;
 	char tty;
 
+
 	/* buitin */
 	b_command *builtin_list;
 	fun builtin_fun;
 } shell_t;
 
 /* Functions for simple_shell*/
-shell_t *init_shell(shell_t *, b_command *, const char *);
+shell_t *init_shell(shell_t *, b_command *, char **);
 void __attribute__((constructor)) init();
 int exec(shell_t *, char *, char *);
 void error_printer(char *, char *);
@@ -85,6 +88,7 @@ void free_args(shell_t *);
 void signal_killer(int);
 
 /* buitin */
+void builtin_history(void *shell);
 int is_builtin(shell_t *shell);
 void builtin_exit(void *shell);
 void builtin_env(void *shell);
@@ -97,11 +101,12 @@ size_t _strspn(char *, const char *);
 char *_strtok(char *, const char *);
 char *_strcat(char *, const char *);
 void _puts(const char *);
+int _readline(shell_t *);
+int _getline(shell_t *);
 char *_strdup(char *);
 int _strlen(char *);
 int _putchar(char);
-int _readline(shell_t *);
-int _getline(shell_t *);
+
 
 /* For deleting blank spaces */
 char *_strcpy(char *, char *);

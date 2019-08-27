@@ -7,25 +7,28 @@
  *
  * Return: void
  */
-shell_t *init_shell(shell_t *shell, b_command *builtin_list, const char *name)
+shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
 {
 	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
-	shell->tty = isatty(STDIN_FILENO) + (isatty(STDOUT_FILENO) ? 2 : 0);
-	errno = 0;  /* Flush extern errno variable */
+	shell->tty = (isatty(STDIN_FILENO) && !argv[1]);
+	shell->tty += (isatty(STDOUT_FILENO) ? 2 : 0);
+	errno = 0; /* Flush extern errno variable */
 	int i = 0;
 
 	shell->builtin_list = builtin_list;
 	shell->path = _getenv("PATH");
+	shell->main_argv = argv;
+	shell->name = argv[0];
 	shell->exit_code = 0;
-	shell->name = name;
 
+	/* Convert the PATH into an array of strings */
 	if (shell->path && strtok(shell->path, ":\n"))
 	{
 		while ((shell->path_dirs[i] = strtok(NULL, ":\n")))
 			i++;
 	}
 
-	/* Set guardian to NULL for halt loop */
+	/* Set the guardian to stop the loop */
 	shell->path_dirs[i] = NULL;
 
 	/* Run always true so it will be reading all the time */
@@ -46,7 +49,7 @@ int read_command(shell_t *shell)
 {
 	int c = 0, r = 0;
 
-	if (shell->tty & 1)
+	if (shell->tty & 1 && !shell->main_argv[1])
 		r = _readline(shell);
 	else
 		r = _getline(shell);
@@ -118,7 +121,7 @@ int exec_command(shell_t *shell)
 		return (-1);
 	}
 	else
-		return ((shell->tty & 2) ? -2 : -1); /* If the user gives a single enter */
+		return ((shell->tty == 3) ? -2 : -1); /* If the user gives a single enter */
 
 	return (false);
 }

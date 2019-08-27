@@ -10,6 +10,7 @@
 int main(__attribute((unused))int argc, char *argv[])
 {
 	b_command builtin_list[] = {
+		{builtin_history, "history"},
 		{builtin_exit, "exit"},
 		{builtin_env, "env"},
 		{builtin_cd, "cd"},
@@ -23,7 +24,7 @@ int main(__attribute((unused))int argc, char *argv[])
 	signal(SIGINT, signal_killer);
 
 	/* Fill in some fields of the structure */
-	init_shell(&shell, builtin_list, argv[0]);
+	init_shell(&shell, builtin_list, argv);
 
 	while (shell.run)
 	{
