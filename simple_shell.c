@@ -67,9 +67,20 @@ int read_command(shell_t *shell)
 			if (_strcmp(shell->argv[0], "\n") == 0)
 				return (false);
 
+			if (shell->command[0] == '#')
+			{
+				shell->argv[1] = NULL;
+				return (false);
+			}
+
 			/* We save the rest of the arguments user entered */
 			for (c = 1; (shell->argv[c] = _strtok(NULL, " \n")); c++)
+			{
+				if (shell->argv[c][0] == '#')
+					break;
+
 				shell->argv[c] = _strdup(shell->argv[c]);
+			}
 
 			/* Set the last element of the array to NULL */
 			shell->argv[c] = NULL;
