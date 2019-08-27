@@ -1,0 +1,43 @@
+./" Manpage for simple_shell
+.TH SIMPLE_SHELL 1 "28 August 2019" "1.0" "Simple Shell Manual Page"
+
+.SH NAME
+
+.B simple_shell (shellyta)
+- the holberton shell man page amazingly magical.
+
+.SH SYNOPSIS
+
+.B hsh
+[options][command string | file]
+
+.SH DESCRIPTION
+
+Behaves similar to a primitive Unix shell with limited functionality. Ideally has the same output as /bin/sh. This shell will execute commands read from the user's standard input. To initiate interactive mode, execute the holberton shell executable. Then type in commands as you would in bash or sh. Hsh also provides a non-interactive mode where the user can pipe commands strings into hsh.
+
+Interprets flags and uses spaces as a delimiter between each argument.
+It currently does not handle piping, redirection, aliases, expansion, and other functions.
+
+The shell can be invoked by typing ./hsh to enter interactive mode.
+Non-interactive mode is also supported so a user can input: [  echo "/bin/ls" | ./hsh  ].
+If the command contains no forward slash, the shell will loop through the PATH and attempt to find a match. If an executable is found then we will pre-pend the command with the absolute path and then execute that. If the search failed then the shell will print a "not found" error.
+
+.SH EXAMPLE
+
+Type ./hsh in the terminal to enter interactive mode. The PS1 prompt will ask for input.
+enter--- echo CisFun!
+
+The output should be CisFun!
+
+To exit, enter Ctrl-D or type in exit. Ctrl+C is currently disabled so it won't work (don't waste your time XD)
+
+Simple_shell may be ran in non-interactive mode. echo 'pwd' | ./hsh
+
+.SH BULTINS
+The following commands are supported:
+
+env - prints the enviornment variables
+
+cd - change the directory to the one you pass after.
+
+exit - quits the program.
