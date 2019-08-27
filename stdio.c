@@ -68,11 +68,11 @@ int _getline(shell_t *shell)
 	static int read_len, pos;
 	size_t fd = STDIN_FILENO;
 	int iline = 0;
+	unsigned int x = -1;/*Profe para comparar entre signed and unsgned*/
 
 	if (shell->main_argv[1])
 		fd = open(shell->main_argv[1], O_RDWR);
-
-	while (fd != -1 && (pos < read_len || (read_len = read(fd, buf, sizeof(buf)))))
+	while (fd != x && (pos < read_len || (read_len = read(fd, buf, sizeof(buf)))))
 	{
 		while (pos < read_len && pos < MAX_BUF_NOTTY)
 		{
@@ -87,25 +87,21 @@ int _getline(shell_t *shell)
 				}
 				else if (!iline)
 				{
-					/* When it's just a new line */
-					shell->command_line[0] = 0;
+					shell->command_line[0] = 0;/* When it's just a new line */
 					pos += ++iline;
 				}
 				else
 					/* When the entry does not end in line break */
 					shell->command_line[iline] = buf[pos];
-
 				return (iline);
 			}
 			shell->command_line[iline++] =  buf[pos++];
 		}
-
 		if (pos == MAX_BUF_NOTTY)
 		{
 			_memset(buf, 0, read_len);
 			pos = 0;
 		}
 	}
-
 	return (false);
 }
