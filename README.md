@@ -23,7 +23,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><code>_strtok.c</code></td>
+							<td><code>strtok.c</code></td>
 							<td>Our own version of strtok which tokenizes any string passed as argument with a delimiter.</td>
 						</tr>
 						<tr>
@@ -45,6 +45,14 @@
 						<tr>
 							<td><code>memory.c</code></td>
 							<td>In charge of freeing the memory and setting it to zero.</td>
+						</tr>
+						<tr>
+							<td><code>shell.h</code></td>
+							<td>Header file which contains all the necessary prototypes, libraries and structures.</td>
+						</tr>
+						<tr>
+							<td><code>signal_killer.c</code></td>
+							<td>It's name says it all lol. In charge of taking Ctrl + C signals.</td>
 						</tr>
 					</tbody>
 				</table>
