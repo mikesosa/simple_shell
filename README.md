@@ -88,7 +88,7 @@
 					Technologies Used
 				</h3>
 				<ul>
-					<li>Language: C, Bash</li>
+					<li><code><strong>#shellyta$</strong> ls</code></li>
 					<li>Operating System: Ubuntu 14.04 LTS (Trusty64)</li>
 					<li>Style: Holberton Betty</li>
 					<li>Compiler: gcc 4.8.4 with flags -Wall -Werror -Wextra -pedantic</li>
