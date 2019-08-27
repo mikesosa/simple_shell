@@ -88,8 +88,11 @@
 					<li><code><strong>#shellyta$ </strong>ls</code></li>
 					<li><code><strong>#shellyta$ </strong>ls -la</code></li>
 					<li><code><strong>#shellyta$ </strong>cd ../</code></li>
-					<li><code><strong>#shellyta$ </strong>echo "Hello World"</code></li>
-					<p>etc....Enjoy!</p>
+					<li><code><strong>#shellyta$ </strong>echo "Hello World"</code><li>
+					<h4>How to exit?</h4>
+					<p>You might already notice that CTRL+C is disabled, so you can simple tipe exit or press CTRL+D:</p>
+					<code><strong>#shellyta$ </strong>exit</code>
+					<p>Enjoy!</p>
 				</ul>
 				<hr>
 				<h3>
