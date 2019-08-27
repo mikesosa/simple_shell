@@ -74,7 +74,10 @@ int read_command(shell_t *shell)
 			for (c = 1; (shell->argv[c] = _strtok(NULL, " \n")); c++)
 			{
 				if (shell->argv[c][0] == '#')
+				{
+					shell->argv[1] = NULL;
 					break;
+				}
 
 				shell->argv[c] = _strdup(shell->argv[c]);
 			}

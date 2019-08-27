@@ -66,6 +66,7 @@ void variables(shell_t *shell)
 			if (!_strcmp(variables_list[i], shell->argv[j]))
 			{
 				variable_handler(shell, j);
+				return;
 			}
 		}
 	}
