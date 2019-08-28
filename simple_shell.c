@@ -112,6 +112,8 @@ int exec_command(shell_t *shell)
 
 		if (builtin)
 			shell->builtin_fun(shell);
+		else if (shell->argv[0][0] == '.' && shell->argv[0][1] == '/')
+			r = exec(shell, NULL, shell->command_line);
 		else if (!shell->path_dirs[0] || shell->path[0] == ':')
 			r = exec(shell, NULL, shell->command_line);
 		else
