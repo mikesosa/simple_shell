@@ -13,7 +13,7 @@ void builtin_exit(void *shell)
 	unsigned long int x = 0;
 
 	len_argv = _strlen(argv[1]);/*len of argv[1]*/
-	if (argv[1] == '\0') /*if no arguments*/
+	if (argv[1][0] == '\0') /*if no arguments*/
 		exit(0);
 	while (argv[1][j] != '\0') /*Filter is it is a number*/
 	{
