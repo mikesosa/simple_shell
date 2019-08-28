@@ -19,9 +19,12 @@ shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
 
 	shell->builtin_list = builtin_list;
 	shell->path = _getenv("PATH");
+	shell->count_commands = 0;
 	shell->main_argv = argv;
 	shell->name = argv[0];
 	shell->exit_code = 0;
+
+	_memset(shell->buf_itoa, 0, sizeof(shell->buf_itoa));
 
 	if (shell->path && _strtok(shell->path, ":\n"))
 	{
@@ -50,6 +53,7 @@ int read_command(shell_t *shell)
 {
 	int c = 0, r = 0;
 
+	shell->count_commands++;
 	if (shell->tty & 1 && !shell->main_argv[1])
 		r = _readline(shell);
 	else
@@ -61,16 +65,13 @@ int read_command(shell_t *shell)
 			shell->command = _strtok(shell->command_line, " \n"); /* A */
 			shell->command = _strdup(shell->command_line); /* B */
 			shell->argv[0] = shell->command; /* C */
-			/* If user types \n with no commands */
 			if (_strcmp(shell->argv[0], "\n") == 0)
 				return (false);
-
 			if (shell->command[0] == '#')
 			{
 				shell->argv[1] = NULL;
 				return (false);
 			}
-			/* We save the rest of the arguments user entered */
 			for (c = 1; (shell->argv[c] = _strtok(NULL, " \n")); c++)
 			{
 				if (shell->argv[c][0] == '#')
@@ -116,9 +117,7 @@ int exec_command(shell_t *shell)
 
 		if (!r && errno)
 		{
-			/* Print error if command doesn't exist */
-			perror(shell->name);
-			errno = 0;
+			_perror(shell);
 		}
 	}
 	else if (!shell->run && (shell->tty == 3))

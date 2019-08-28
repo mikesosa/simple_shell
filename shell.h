@@ -40,6 +40,8 @@ typedef struct b_command
  * @command_line: bufer where we strore the _getline, of MAX_LEN size.
  * @path_dirs: array of dirs
  * @exit_code_child: exit code child
+ * @count_commands: count commands
+ * @buf_itoa: buffer integer to string
  * @name: program name
  * @main_argv: args vector
  * @command_len: lenght of the string entered by the user
@@ -60,6 +62,8 @@ typedef struct shell_t
 	char command_line[MAX_LEN];
 	char *path_dirs[512];
 	int exit_code_child;
+	int count_commands;
+	char buf_itoa[64];
 	const char *name;
 	char **main_argv;
 	int command_len;
@@ -82,11 +86,13 @@ int exec(shell_t *, char *, char *);
 void error_printer(char *, char *);
 void *_memset(void *, int, size_t);
 void print_prompt_tty(shell_t *);
+void _perror(shell_t *shell);
 int exec_command(shell_t *);
 char *_getenv(const char *);
 int read_command(shell_t *);
 void free_args(shell_t *);
 void signal_killer(int);
+int itoa(int, char *);
 
 void builtin_history(void *shell);
 int is_builtin(shell_t *shell);
