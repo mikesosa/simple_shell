@@ -9,12 +9,38 @@ void builtin_exit(void *shell)
 {
 	shell_t *shell_tmp = (shell_t *)shell;
 	char **argv = shell_tmp->argv;
+	int j = 0, len_argv = 0;
+	unsigned long int x = 0;
 
-	/* Exit of the shell with error */
-	shell_tmp->exit_code = argv[1] ? atoi(argv[1]) : 0;
-	shell_tmp->run = 0;
-	errno = 0;
+	len_argv = _strlen(argv[1]);/*len of argv[1]*/
+	if (argv[1] == '\0') /*if no arguments*/
+		exit(0);
+	while (argv[1][j] != '\0') /*Filter is it is a number*/
+	{
+		if (!(argv[1][j] >= '0' && argv[1][j] <= '9'))
+		{
+			_pexit(shell);
+			exit(2);
+		}
+		j++;
+	}
+	if (len_argv <= 10) /*if not too long*/
+	{
+		x = string_to_int(argv[1]);
+		if (x > 2147483647)
+		{
+			_pexit(shell);
+			exit(2);
+		}
+		shell_tmp->exit_code = argv[1] ? atoi(argv[1]) : 0;
+		exit(shell_tmp->exit_code); /* Exit of the shell with error */
+	} else
+	{
+		_pexit(shell);
+		exit(2);
+	}
 }
+
 /**
  * builtin_cd - change working directory
  * @shell: global shell struct
