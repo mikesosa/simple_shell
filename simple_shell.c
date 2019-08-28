@@ -144,7 +144,7 @@ int exec_command(shell_t *shell)
 void print_prompt_tty(shell_t *shell)
 {
 	if (!shell || (shell && (shell->tty == 3)))
-		_puts("\x1B[1;33m#shellyta$\x1B[0m "); /*Prints the promt in color*/
+		_puts("#cisfun$ "); /*Prints the promt in color*/
 
 	fflush(stdout);
 }
