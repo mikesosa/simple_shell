@@ -27,6 +27,7 @@ void builtin_cd(void *shell)
 	static char old_path[120] = {0};
 	char **argv = shell_tmp->argv;
 	char path[120] = {0};
+	char *tmp = NULL;
 
 	/* Copy the path that the user sent */
 	if (argv[1])
@@ -34,10 +35,17 @@ void builtin_cd(void *shell)
 
 	if (!argv[1] || argv[1][0] == '~')
 	{
-		_strcpy(path, _getenv("HOME"));
+		tmp = _getenv("HOME");
 
-		if (argv[1])
-			_strcat(path, &argv[1][1]);
+		if (tmp)
+		{
+			_strcpy(path, tmp);
+
+			if (argv[1])
+				_strcat(path, &argv[1][1]);
+		}
+		else
+			return;
 	}
 	else if (argv[1][0] == '-')
 	{
@@ -49,7 +57,6 @@ void builtin_cd(void *shell)
 
 	getcwd(old_path, sizeof(old_path));
 	chdir(path);
-	errno = 0;
 }
 /**
  * builtin_env - print enviroment
