@@ -118,7 +118,7 @@ int exec_command(shell_t *shell)
 		{
 			/* Print error if command doesn't exist */
 			perror(shell->name);
-			errno = 0;
+			errno = 127;
 		}
 	}
 	else if (!shell->run && (shell->tty == 3))
