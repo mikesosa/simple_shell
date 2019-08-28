@@ -16,6 +16,6 @@ void _perror(shell_t *shell)
 	write(STDERR_FILENO, shell->buf_itoa, _strlen(shell->buf_itoa));
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, shell->command, _strlen(shell->command));
-	write(STDERR_FILENO, " : not found\n", 13);
+	write(STDERR_FILENO, ": not found\n", 13);
 	errno = 0;
 }
