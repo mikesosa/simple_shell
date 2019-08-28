@@ -71,6 +71,13 @@ int _getline(shell_t *shell)
 
 	if (shell->main_argv[1])
 		fd = open(shell->main_argv[1], O_RDWR);
+
+	if (fd == -1)
+	{
+		perror(shell->main_argv[0]);
+		return (false);
+	}
+
 	while (fd != -1 && (pos < len || (len = read(fd, buf, sizeof(buf)))))
 	{
 		while (pos < len && pos < MAX_BUF_NOTTY)
