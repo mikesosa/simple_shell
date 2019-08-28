@@ -15,7 +15,7 @@
 #include <errno.h>
 
 #define MAX_BUF_NOTTY 4096
-#define MAX_LEN 1024
+#define MAX_LEN 4096
 #define false 0
 #define true 1
 
