@@ -10,7 +10,7 @@
  */
 shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
 {
-	int i = 0, len = 0;
+	int i = 0;
 
 	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
 	shell->tty = (isatty(STDIN_FILENO) && !argv[1]);
