@@ -39,5 +39,8 @@ int main(__attribute((unused))int argc, char *argv[])
 	}
 
 	/* Returns false if there is no errors */
-	return (shell.exit_code);
+	if (shell.argv[1])
+		return (shell.exit_code);
+
+	return (shell.exit_code_child);
 }

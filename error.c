@@ -26,15 +26,15 @@ void _perror(shell_t *shell)
  *
  * Return: void
  */
- void _pexit(shell_t *shell)
- {
- 	itoa(shell->count_commands, shell->buf_itoa);
+void _pexit(shell_t *shell)
+{
+	itoa(shell->count_commands, shell->buf_itoa);
 
- 	/* Print error if command doesn't exist */
- 	write(STDERR_FILENO, shell->name, _strlen((char *)shell->name));
- 	write(STDERR_FILENO, ": ", 2);
- 	write(STDERR_FILENO, shell->buf_itoa, _strlen(shell->buf_itoa));
- 	write(STDERR_FILENO, ": exit: Ilegal number: ", 24);
- 	write(STDERR_FILENO, shell->argv[1], _strlen(shell->argv[1]));
- 	write(STDERR_FILENO, "\n", 1);
- }
+	/* Print error if command doesn't exist */
+	write(STDERR_FILENO, shell->name, _strlen((char *)shell->name));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, shell->buf_itoa, _strlen(shell->buf_itoa));
+	write(STDERR_FILENO, ": exit: Ilegal number: ", 24);
+	write(STDERR_FILENO, shell->argv[1], _strlen(shell->argv[1]));
+	write(STDERR_FILENO, "\n", 1);
+}

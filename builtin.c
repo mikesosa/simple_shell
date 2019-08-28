@@ -12,9 +12,7 @@ void builtin_exit(void *shell)
 
 	/* Exit of the shell with error */
 	shell_tmp->exit_code = argv[1] ? atoi(argv[1]) : 0;
-	if (argv[1])
-		exit(shell_tmp->exit_code);
-	exit(shell_tmp->exit_code_child);
+	shell_tmp->run = 0;
 }
 /**
  * builtin_cd - change working directory

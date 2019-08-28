@@ -20,8 +20,8 @@ shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
 	shell->builtin_list = builtin_list;
 	shell->path = _getenv("PATH");
 	shell->count_commands = 0;
-	shell->main_argv = argv;
 	shell->name = argv[0] + 2;
+	shell->main_argv = argv;
 	shell->exit_code = 0;
 
 	_memset(shell->buf_itoa, 0, sizeof(shell->buf_itoa));
@@ -117,6 +117,7 @@ int exec_command(shell_t *shell)
 
 		if (!r && errno)
 		{
+			shell->exit_code_child = 127;
 			_perror(shell);
 		}
 	}
