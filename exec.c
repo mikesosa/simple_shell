@@ -47,13 +47,11 @@ int exec(shell_t *shell, char *path_bin, char *cmd)
 
 	if (access(full_path, F_OK) == 0)
 	{
-		free(shell->argv[0]);
-		shell->argv[0] = _strdup(full_path);
 		int id = fork();
 
 		if (!id)
 		{
-			execve(shell->argv[0], &shell->argv[0], NULL);
+			execve(full_path, &shell->argv[0], NULL);
 
 			/* To stop the child process */
 			shell->run = false;
