@@ -29,11 +29,11 @@ shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
 	_memset(shell->buf_itoa, 0, sizeof(shell->buf_itoa));
 	shell->path = _strdup(shell->path);
 
-	shell->path_dirs[0] = strtok(shell->path, ":\n");
+	shell->path_dirs[0] = _strtok(shell->path, ":\n");
 
 	if (shell->path && shell->path_dirs[0])
 	{
-		for (i = 1; (shell->path_dirs[i] = strtok(NULL, ":\n")); i++)
+		for (i = 1; (shell->path_dirs[i] = _strtok(NULL, ":\n")); i++)
 			;
 	}
 
