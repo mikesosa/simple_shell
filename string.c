@@ -90,22 +90,26 @@ int _strlen(char *s)
  */
 void deblank(shell_t *shell)
 {
-	char *input = shell->command_line;
-	int i, j;
+	char *buffer;
+	int i = 0, j = 0;
 
-	for (i = 0, j = 0; i < _strlen(input); i++, j++)
+	buffer = shell->command_line;
+
+	if (buffer[i] == 32 || buffer[i] == 9)
 	{
-		if (input[i] != ' ' && input[i] != '\t')
+		while (buffer[i] == 32 || buffer[i] == 9)
 		{
-			/* If its an space put it and later we will overwrite tht */
-			input[j] = input[i];
-
-			if (input[i + 1] == ' ' || input[i + 1] == '\t')
-				input[++j] = input[++i];
+			i++;
 		}
-		else
-			j--;
+		while (buffer[i] != '\0')
+		{
+			buffer[j] = buffer[i];
+			i++;
+			j++;
+		}
+		while (buffer[j] != '\0')
+		{
+			buffer[j] = '\0';
+		}
 	}
-
-	input[j - ((shell->tty & 1) ? 1 : 0)] = '\0';
 }
