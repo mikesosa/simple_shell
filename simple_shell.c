@@ -10,7 +10,7 @@
  */
 shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
 {
-	int i = 0;
+	int i = 0, len = 0;
 
 	/* isatty() 1 if the given file descriptor is a terminal, 0 otherwise */
 	shell->tty = (isatty(STDIN_FILENO) && !argv[1]);
@@ -25,11 +25,14 @@ shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
 	shell->exit_code = 0;
 
 	_memset(shell->buf_itoa, 0, sizeof(shell->buf_itoa));
+	shell->path = _strdup(shell->path);
 
-	if (shell->path && _strtok(shell->path, ":\n"))
+	shell->path_dirs[0] = strtok(shell->path, ":\n");
+
+	if (shell->path && shell->path_dirs[0])
 	{
-		while ((shell->path_dirs[i] = _strtok(NULL, ":\n")))
-			i++;
+		for (i = 1; (shell->path_dirs[i] = strtok(NULL, ":\n")); i++)
+			;
 	}
 
 	/* Set the guardian to stop the loop */
