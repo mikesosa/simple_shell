@@ -9,9 +9,22 @@ void builtin_exit(void *shell)
 {
 	shell_t *shell_tmp = (shell_t *)shell;
 	char **argv = shell_tmp->argv;
+	int j = 0;
 
-	/* Exit of the shell with error */
-	shell_tmp->exit_code = argv[1] ? atoi(argv[1]) : 0;
+	if (argv[1])/* si hay argumentos entonces */
+	{
+		while (argv[1][j] != '\0') /*recorrinedo el argumento hasta nulo*/
+		{
+			if (!(argv[1][j] >= '0' && argv[1][j] <= '9'))/*if not a number*/
+			{
+				_pexit(shell);
+					exit(2);
+			}
+			j++;
+		}
+		shell_tmp->exit_code = atoi(argv[1]);
+	}
+	shell_tmp->exit_code = 0;
 	shell_tmp->run = 0;
 }
 /**
