@@ -9,20 +9,32 @@ void builtin_exit(void *shell)
 {
 	shell_t *shell_tmp = (shell_t *)shell;
 	char **argv = shell_tmp->argv;
-	int j = 0;
+	int j = 0, len_argv = 0;
+	unsigned long int x = 0;
 
-	if (argv[1])/* si hay argumentos entonces */
+	if (argv[1] && len_argv < 11)/* if quialifies */
 	{
+		x = string_to_int(argv[1]);
 		while (argv[1][j] != '\0') /*recorrinedo el argumento hasta nulo*/
 		{
 			if (!(argv[1][j] >= '0' && argv[1][j] <= '9'))/*if not a number*/
 			{
 				_pexit(shell);
-					exit(2);
+				exit(2);
 			}
 			j++;
 		}
+		if (x > 2147483647) /*if number but greather than # exit*/
+		{
+			_pexit(shell);
+			exit(2);
+		}
 		shell_tmp->exit_code = atoi(argv[1]);
+		exit(shell_tmp->exit_code);
+	} else if (len_argv >= 11)
+	{
+		_pexit(shell);
+		exit(2);
 	}
 	shell_tmp->exit_code = 0;
 	shell_tmp->run = 0;
