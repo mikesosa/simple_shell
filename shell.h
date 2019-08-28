@@ -87,6 +87,7 @@ void error_printer(char *, char *);
 void *_memset(void *, int, size_t);
 void print_prompt_tty(shell_t *);
 void _perror(shell_t *shell);
+void _pexit(shell_t *shell);
 int exec_command(shell_t *);
 char *_getenv(const char *);
 int read_command(shell_t *);
@@ -115,6 +116,7 @@ int _getline(shell_t *);
 char *_strdup(char *);
 int _strlen(char *);
 int _putchar(char);
+int string_to_int(char *s);
 
 
 /* For deleting blank spaces */
