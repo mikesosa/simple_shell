@@ -65,22 +65,23 @@ int _readline(shell_t *shell)
 int _getline(shell_t *shell)
 {
 	static char buf[MAX_BUF_NOTTY] = {0};
-	static int len, pos;
 	int fd = STDIN_FILENO;
+	static int len, pos;
+	static int rr = 1;
 	int iline = 0;
 
 	if (shell->main_argv[1])
 		fd = open(shell->main_argv[1], O_RDWR);
-
-	while (fd != -1 && (pos < len || (len = read(fd, buf, sizeof(buf)))))
+	while (fd != -1 && (pos < len || (len = read(fd, buf, sizeof(buf)))) && rr)
 	{
+		if (len < MAX_BUF_NOTTY)
+			rr = 0;
 		while (pos < len && pos < MAX_BUF_NOTTY)
 		{
 			if (buf[pos] == '\n' || (pos == len - 1 && pos != MAX_BUF_NOTTY))
 			{
 				if (buf[pos] == '\n' && iline)
 				{
-					/* Returns when it finds a new line and it's not just a new line */
 					shell->command_line[iline] = 0;
 					deblank(shell);
 					pos++;
@@ -91,7 +92,6 @@ int _getline(shell_t *shell)
 					pos += ++iline;
 				}
 				else
-					/* When the entry does not end in line break */
 					shell->command_line[iline] = buf[pos];
 				return (iline);
 			}
