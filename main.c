@@ -38,6 +38,9 @@ int main(__attribute((unused))int argc, char *argv[])
 			free_args(&shell);
 	}
 
+	/* Free own path */
+	free(shell.path);
+
 	/* Returns false if there is no errors */
 	if (shell.argv[1])
 		return (shell.exit_code);
