@@ -20,18 +20,16 @@ void builtin_exit(void *shell)
 			if (!(argv[1][j] >= '0' && argv[1][j] <= '9'))/*if not a number*/
 			{
 				_pexit(shell);
-				free_args(shell_tmp);
-				free(shell_tmp->path);
-				exit(2);
+				shell_tmp->exit_code_child = 2;
+				return;
 			}
 			j++;
 		}
 		if (x > 2147483647) /*if number but greather than # exit*/
 		{
 			_pexit(shell);
-			free_args(shell_tmp);
-			free(shell_tmp->path);
-			exit(2);
+			shell_tmp->exit_code_child = 2;
+			return;
 		}
 		shell_tmp->exit_code = atoi(argv[1]);
 		free_args(shell_tmp);
