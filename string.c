@@ -95,12 +95,12 @@ void deblank(shell_t *shell)
 
 	for (i = 0, j = 0; i < _strlen(input); i++, j++)
 	{
-		if (input[i] != ' ' && input[i] != '\t')
+		if (input[i] != ' ' && input[i] != '\t' && input[i] != '\v')
 		{
 			/* If its an space put it and later we will overwrite tht */
 			input[j] = input[i];
 
-			if (input[i + 1] == ' ' || input[i + 1] == '\t')
+			if (input[i + 1] == ' ' || input[i + 1] == '\t' || input[i + 1] == '\v')
 				input[++j] = input[++i];
 		}
 		else
