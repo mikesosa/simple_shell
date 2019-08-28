@@ -9,38 +9,11 @@ void builtin_exit(void *shell)
 {
 	shell_t *shell_tmp = (shell_t *)shell;
 	char **argv = shell_tmp->argv;
-	int j = 0, len_argv = 0;
-	unsigned long int x = 0;
 
-	len_argv = _strlen(argv[1]);/*len of argv[1]*/
-	if (argv[1][0] == '\0') /*if no arguments*/
-		exit(0);
-	while (argv[1][j] != '\0') /*Filter is it is a number*/
-	{
-		if (!(argv[1][j] >= '0' && argv[1][j] <= '9'))
-		{
-			_pexit(shell);
-			exit(2);
-		}
-		j++;
-	}
-	if (len_argv <= 10) /*if not too long*/
-	{
-		x = string_to_int(argv[1]);
-		if (x > 2147483647)
-		{
-			_pexit(shell);
-			exit(2);
-		}
-		shell_tmp->exit_code = argv[1] ? atoi(argv[1]) : 0;
-		exit(shell_tmp->exit_code); /* Exit of the shell with error */
-	} else
-	{
-		_pexit(shell);
-		exit(2);
-	}
+	/* Exit of the shell with error */
+	shell_tmp->exit_code = argv[1] ? atoi(argv[1]) : 0;
+	exit(shell_tmp->exit_code);
 }
-
 /**
  * builtin_cd - change working directory
  * @shell: global shell struct
@@ -125,7 +98,7 @@ int is_builtin(shell_t *shell)
 
 	for (i = 0; shell->builtin_list[i].name; i++)
 	{
-		if (!_strcmp(shell->builtin_list[i].name, shell->argv[0]))
+		if (!_strcmp(shell->builtin_list[i].name, shell->command))
 		{
 			shell->builtin_fun = shell->builtin_list[i].function;
 			return (true);
