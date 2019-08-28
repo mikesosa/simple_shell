@@ -53,6 +53,7 @@ typedef struct b_command
  * @tty: teletype tell us if the given file descriptor is a terminal
  * @builtin_list: list of the builtin commands
  * @builtin_fun: callback function
+ * @exit: when its an exit for builtin
  *
  * Description: Necessary variables needed to simple_shell
  * for Holberton project
@@ -73,6 +74,7 @@ typedef struct shell_t
 	char *path;
 	char run;
 	char tty;
+	int exit;
 
 	/* buitin */
 	b_command *builtin_list;

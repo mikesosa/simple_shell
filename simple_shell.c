@@ -23,6 +23,8 @@ shell_t *init_shell(shell_t *shell, b_command *builtin_list, char **argv)
 	shell->name = argv[0] + 2;
 	shell->main_argv = argv;
 	shell->exit_code = 0;
+	shell->exit_code_child = 0;
+	shell->exit = 0;
 
 	_memset(shell->buf_itoa, 0, sizeof(shell->buf_itoa));
 	shell->path = _strdup(shell->path);

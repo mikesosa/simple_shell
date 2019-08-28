@@ -42,7 +42,7 @@ int main(__attribute((unused))int argc, char *argv[])
 	free(shell.path);
 
 	/* Returns false if there is no errors */
-	if (shell.argv[1])
+	if (shell.exit && shell.argv[1])
 		return (shell.exit_code);
 
 	return (shell.exit_code_child);

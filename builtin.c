@@ -37,7 +37,9 @@ void builtin_exit(void *shell)
 		exit(2);
 	}
 	shell_tmp->exit_code = 0;
+	shell_tmp->exit = 1;
 	shell_tmp->run = 0;
+
 }
 /**
  * builtin_cd - change working directory
