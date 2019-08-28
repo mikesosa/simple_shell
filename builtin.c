@@ -56,7 +56,9 @@ void builtin_cd(void *shell)
 	}
 
 	getcwd(old_path, sizeof(old_path));
-	chdir(path);
+
+	if (!chdir(path))
+		errno = 0;
 }
 /**
  * builtin_env - print enviroment
