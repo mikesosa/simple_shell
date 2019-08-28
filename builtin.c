@@ -99,7 +99,7 @@ int is_builtin(shell_t *shell)
 
 	for (i = 0; shell->builtin_list[i].name; i++)
 	{
-		if (!_strcmp(shell->builtin_list[i].name, shell->command))
+		if (!_strcmp(shell->builtin_list[i].name, shell->argv[0]))
 		{
 			shell->builtin_fun = shell->builtin_list[i].function;
 			return (true);

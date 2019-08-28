@@ -33,7 +33,7 @@ char *_strcat(char *dest, const char *src)
 */
 int exec(shell_t *shell, char *path_bin, char *cmd)
 {
-	char full_path[120] = {0};
+	char full_path[MAX_BUF_NOTTY] = {0};
 	const char *delim = "/";
 	int status = 0;
 
