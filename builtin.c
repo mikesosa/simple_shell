@@ -43,7 +43,9 @@ void builtin_exit(void *shell)
 	shell_tmp->exit_code = 0;
 	shell_tmp->exit = 1;
 	shell_tmp->run = 0;
-
+	free_args(shell_tmp);
+	free(shell_tmp->path);
+	exit(shell_tmp->exit_code_child);
 }
 /**
  * builtin_cd - change working directory
