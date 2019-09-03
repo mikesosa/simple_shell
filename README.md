@@ -3,7 +3,7 @@
 	<body>
 			<article>
 				<h1>
-					Building our own Shell (Shellyta)
+					Building our own Shell (Shellyta)!
 				</h1>
 				<h2>
 					Introduction
